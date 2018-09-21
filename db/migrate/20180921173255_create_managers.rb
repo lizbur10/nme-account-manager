@@ -3,6 +3,8 @@ class CreateManagers < ActiveRecord::Migration[5.2]
     create_table :managers do |t|
       t.integer :market_id
       t.string :name
+      t.string :username
+      t.string :password
       t.string :contact_info
 
       t.timestamps
