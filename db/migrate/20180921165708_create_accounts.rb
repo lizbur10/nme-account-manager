@@ -1,7 +1,6 @@
 class CreateAccounts < ActiveRecord::Migration[5.2]
   def change
     create_table :accounts do |t|
-      t.string :manager
       t.string :company_name
       t.string :company_address
       t.string :company_city
