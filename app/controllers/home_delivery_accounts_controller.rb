@@ -1,0 +1,2 @@
+class HomeDeliveryAccountsController < ApplicationController
+end

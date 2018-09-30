@@ -1,6 +1,6 @@
-class CreateCustomers < ActiveRecord::Migration[5.2]
+class CreateHomeDeliveryAccounts < ActiveRecord::Migration[5.2]
   def change
-    create_table :customers do |t|
+    create_table :home_delivery_accounts do |t|
       t.integer :manager_id
       t.string :customer_name
       t.string :customer_address
