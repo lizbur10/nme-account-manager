@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
 import Layout from './components/Layout/Layout';
+import ManageWorkplaceAccounts from './containers/ManageWorkplaceAccounts/ManageWorkplaceAccounts';
+
 
 class App extends Component {
   render() {
     return (
       <div>
         <Layout>
-          <p>Here's where the stuff goes</p>
+          <ManageWorkplaceAccounts />
         </Layout>
       </div>
     );
