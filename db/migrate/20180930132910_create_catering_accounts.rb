@@ -9,6 +9,7 @@ class CreateCateringAccounts < ActiveRecord::Migration[5.2]
       t.string :contact_name
       t.string :contact_email
       t.string :contact_phone
+      t.text :special_instructions
     end
   end
 end

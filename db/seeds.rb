@@ -19,7 +19,7 @@
 #     special_instructions: 'Bring an anvil and some TNT'
 # )
 
-# Market.create([{ name: 'Albany' }, { name: 'Boston' }])
+Market.create([{ name: 'Albany' }, { name: 'Boston' }])
 
 DATA_managers = {
     :manager_keys =>

@@ -10,33 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_184055) do
+ActiveRecord::Schema.define(version: 2018_09_30_132910) do
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "catering_accounts", force: :cascade do |t|
     t.integer "manager_id"
     t.string "company_name"
     t.string "company_address"
     t.string "company_city"
-    t.string "ctct_email_list"
+    t.string "company_zip_code"
     t.string "contact_name"
     t.string "contact_email"
     t.string "contact_phone"
-    t.string "delivery_day"
-    t.string "delivery_time"
     t.text "special_instructions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  create_table "customers", force: :cascade do |t|
+  create_table "home_delivery_accounts", force: :cascade do |t|
     t.integer "manager_id"
+    t.boolean "active"
     t.string "customer_name"
     t.string "customer_address"
     t.string "customer_city"
+    t.string "customer_zip_code"
     t.string "customer_email"
     t.string "customer_phone"
     t.string "delivery_day"
-    t.text "order"
     t.string "add_ons"
     t.text "special_instructions"
     t.datetime "created_at", null: false
@@ -55,6 +52,27 @@ ActiveRecord::Schema.define(version: 2018_09_21_184055) do
 
   create_table "markets", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workplace_accounts", force: :cascade do |t|
+    t.integer "manager_id"
+    t.boolean "active"
+    t.string "company_name"
+    t.string "company_address"
+    t.string "company_city"
+    t.string "company_zip_code"
+    t.string "ctct_email_list"
+    t.string "scheduling_contact_name"
+    t.string "scheduling_contact_phone"
+    t.string "scheduling_contact_email"
+    t.string "hr_contact_name"
+    t.string "hr_contact_phone"
+    t.string "hr_contact_email"
+    t.string "delivery_day"
+    t.string "delivery_time"
+    t.text "special_instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
