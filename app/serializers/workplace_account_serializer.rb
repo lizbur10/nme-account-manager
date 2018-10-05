@@ -15,4 +15,5 @@ class WorkplaceAccountSerializer < ActiveModel::Serializer
     :delivery_day,
     :delivery_time,
     :special_instructions
+  belongs_to :manager
 end
