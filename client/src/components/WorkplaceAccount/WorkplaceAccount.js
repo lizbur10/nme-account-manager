@@ -10,10 +10,10 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnCompanyInfo = (companyInfoKey) => {
             let inputValue;
+
             if (this.props.companyInfo[companyInfoKey] == null) {
-                inputValue=undefined;
-            }
-            else {
+                inputValue=' ';
+            } else {
                 inputValue = this.props.companyInfo[companyInfoKey]
             }
             return(
@@ -23,15 +23,21 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         // MAKE THE LIST OF MANAGERS DYNAMIC
         const returnAccountManager = () => {
-            return (
-                <p key="accountManager">Account Manager: <select onChange={this.props.changeHandler} name="accountManager" value={this.props.companyInfo["accountManager"].toLowerCase()} >
-                    <option value="gordon">Gordon</option>
-                    <option value="sarah">Sarah</option>
-                    <option value="eliza">Eliza</option>
-                    <option value="lisa">Lisa</option>
-                    <option value="liz">Liz</option>
-                </select></p>
-            );
+            
+            if (this.props.companyInfo["accountManager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
+                return (
+                    <p key="accountManager">Account Manager: <select onChange={this.props.changeHandler} name="accountManager" value={this.props.companyInfo["accountManager"]["name"].toLowerCase()} >
+                        <option value="gordon">Gordon</option>
+                        <option value="sarah">Sarah</option>
+                        <option value="eliza">Eliza</option>
+                        <option value="lisa">Lisa</option>
+                        <option value="liz">Liz</option>
+                        <option value="tyler">Tyler</option>
+                    </select></p>
+                );
+            } else {
+                console.log(this);
+            }
         }
 
         const returnDeliveryDay = () => {
@@ -47,7 +53,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnSpecialInstructions = () => {
             return (
-                <p key="specialInstructions">Special Instructions: <br /><br /> <textarea onChange={this.props.changeHandler} name="specialInstructions" value={this.props.companyInfo["specialInstructions"]}></textarea></p>
+                <div key="specialInstructions">Special Instructions: <br /><br /> <textarea onChange={this.props.changeHandler} name="specialInstructions" value={this.props.companyInfo["specialInstructions"]}></textarea></div>
             );
         }
 
