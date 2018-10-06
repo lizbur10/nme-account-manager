@@ -3,19 +3,7 @@ import WorkplaceAccount from '../../components/WorkplaceAccount/WorkplaceAccount
 
 class WorkplaceAccountContainer extends Component {
     state = {
-        companyInfo: {
-            accountManager: 'Sarah',
-            companyName: 'ACME Corp',
-            companyAddress: '123 Main St',
-            companyCity: 'Cambridge',
-            constantContactEmailList: 'ACME Corp',
-            contactName: 'Joe',
-            contactEmail: 'joe@acmecorp.com',
-            contactPhone: '555-1000',
-            deliveryDay: 'Tuesday',
-            deliveryTime: '9:00-9:20',
-            specialInstructions: 'Bring an anvil and some TNT'
-        }
+        companyInfo: [] 
     }
 
     changeHandler = (event) => {
@@ -34,6 +22,16 @@ class WorkplaceAccountContainer extends Component {
                 <WorkplaceAccount companyInfo={this.state.companyInfo} changeHandler={this.changeHandler} /> 
             </React.Fragment>
         );
+    }
+
+    componentDidMount() {
+        fetch('/workplace_accounts/1')
+          .then(response => response.json())
+          .then(data => {
+            this.setState({
+              companyInfo: data
+            })
+          })
     }
 }
 
