@@ -9,8 +9,15 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         }
 
         const returnCompanyInfo = (companyInfoKey) => {
+            let inputValue;
+            if (this.props.companyInfo[companyInfoKey] == null) {
+                inputValue=undefined;
+            }
+            else {
+                inputValue = this.props.companyInfo[companyInfoKey]
+            }
             return(
-                <p key={companyInfoKey} >{labelMaker(companyInfoKey)}: <input onChange={this.props.changeHandler} type="text" name={companyInfoKey} value={this.props.companyInfo[companyInfoKey]} /></p>
+                <p key={companyInfoKey} >{labelMaker(companyInfoKey)}: <input onChange={this.props.changeHandler} type="text" name={companyInfoKey} value={inputValue} /></p>
             );
         }
 
