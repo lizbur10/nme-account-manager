@@ -7,10 +7,11 @@ class WorkplaceAccountContainer extends Component {
     }
 
     changeHandler = (event) => {
+        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
             companyInfo: {
                 ...this.state.companyInfo,
-                [event.target.name]: event.target.value
+                [event.target.name]: value
             }
         })
       }

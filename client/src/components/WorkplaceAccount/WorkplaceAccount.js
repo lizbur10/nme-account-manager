@@ -40,6 +40,19 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
             }
         }
 
+        const returnActive = () => { // maybe add npm react-toggle-switch (https://www.npmjs.com/package/react-toggle-switch)
+            return (
+                <label key="isActive">
+                    Is Active: 
+                        <input 
+                            name="active" 
+                            type="checkbox" 
+                            checked={this.props.companyInfo["active"]} 
+                            onChange={this.props.changeHandler} />
+                </label>
+            )
+        }
+
         const returnDeliveryDay = () => {
             return(
                 <p key="deliveryDay">Delivery Day: <select onChange={this.props.changeHandler} name="deliveryDay" value={this.props.companyInfo["deliveryDay"].toLowerCase()} >
@@ -65,6 +78,8 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
                     {attributeList.map((attr) => {
                         if (attr === "accountManager") {
                             return returnAccountManager();
+                        } else if (attr === "active") {
+                            return returnActive();
                         } else if (attr === "deliveryDay") {
                             return returnDeliveryDay();
                         } else if (attr === "specialInstructions") {
