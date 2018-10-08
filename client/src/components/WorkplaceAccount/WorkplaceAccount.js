@@ -24,9 +24,9 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         // MAKE THE LIST OF MANAGERS DYNAMIC
         const returnAccountManager = () => {
             
-            if (this.props.companyInfo["accountManager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
+            if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
                 return (
-                    <p key="accountManager">Account Manager: <select onChange={this.props.handleChange} name="accountManager" value={this.props.companyInfo["accountManager"]["name"].toLowerCase()} >
+                    <p key="accountManager">Account Manager: <select onChange={this.props.handleChange} name="accountManager" value={this.props.companyInfo["manager"]["name"].toLowerCase()} >
                         <option value="gordon">Gordon</option>
                         <option value="sarah">Sarah</option>
                         <option value="eliza">Eliza</option>
@@ -55,7 +55,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnDeliveryDay = () => {
             return(
-                <p key="deliveryDay">Delivery Day: <select onChange={this.props.handleChange} name="deliveryDay" value={this.props.companyInfo["deliveryDay"].toLowerCase()} >
+                <p key="deliveryDay">Delivery Day: <select onChange={this.props.handleChange} name="deliveryDay" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
                     <option value="monday">Monday</option>
                     <option value="tuesday">Tuesday</option>
                     <option value="wednesday">Wednesday</option>
@@ -66,7 +66,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnSpecialInstructions = () => {
             return (
-                <div key="specialInstructions">Special Instructions: <br /><br /> <textarea onChange={this.props.handleChange} name="specialInstructions" value={this.props.companyInfo["specialInstructions"]}></textarea></div>
+                <div key="specialInstructions">Special Instructions: <br /><br /> <textarea onChange={this.props.handleChange} name="specialInstructions" value={this.props.companyInfo["special_instructions"]}></textarea></div>
             );
         }
 
@@ -76,18 +76,19 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
                 <h1>Account Details</h1>
                 <form>
                     {attributeList.map((attr) => {
-                        if (attr === "accountManager") {
+                        if (attr === "manager") {
                             return returnAccountManager();
                         } else if (attr === "active") {
                             return returnActive();
-                        } else if (attr === "deliveryDay") {
+                        } else if (attr === "delivery_day") {
                             return returnDeliveryDay();
-                        } else if (attr === "specialInstructions") {
+                        } else if (attr === "special_instructions") {
                             return returnSpecialInstructions();
                         } else {
                             return returnCompanyInfo(attr);
                         }
                     })}
+                <button onClick={this.props.handleSubmit}>Submit Changes</button>
                 </form>
             </React.Fragment>
         );
