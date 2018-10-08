@@ -5,7 +5,8 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
     render () {
 
         const labelMaker = (varName) => {
-            return varName.split(/(?=[A-Z])/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+            // return varName.split(/(?=[A-Z])/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+            return varName.replace(/_/g, " ").replace("ctct", "CTCT").replace(/hr/, "HR").split(/\s/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
         }
 
         const returnCompanyInfo = (companyInfoKey) => {
@@ -17,32 +18,32 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
                 inputValue = this.props.companyInfo[companyInfoKey]
             }
             return(
-                <p key={companyInfoKey} >{labelMaker(companyInfoKey)}: <input onChange={this.props.handleChange} type="text" name={companyInfoKey} value={inputValue} /></p>
+                <p>{labelMaker(companyInfoKey)}: <input onChange={this.props.handleChange} type="text" name={companyInfoKey} value={inputValue} /></p>
             );
         }
 
-        // MAKE THE LIST OF MANAGERS DYNAMIC
-        const returnAccountManager = () => {
+        // MOVE MANAGER EDITING FUNCTIONALITY TO ACCOUNT LIST PAGE
+        // const returnAccountManager = () => {
             
-            if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
-                return (
-                    <p key="accountManager">Account Manager: <select onChange={this.props.handleChange} name="accountManager" value={this.props.companyInfo["manager"]["name"].toLowerCase()} >
-                        <option value="gordon">Gordon</option>
-                        <option value="sarah">Sarah</option>
-                        <option value="eliza">Eliza</option>
-                        <option value="lisa">Lisa</option>
-                        <option value="liz">Liz</option>
-                        <option value="tyler">Tyler</option>
-                    </select></p>
-                );
-            } else {
-                console.log(this);
-            }
-        }
+        //     if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
+        //         return (
+        //             <p key="accountManager">Account Manager: <select onChange={this.props.handleChange} name="accountManager" value={this.props.companyInfo["manager"]["name"].toLowerCase()} >
+        //                 <option value="gordon">Gordon</option>
+        //                 <option value="sarah">Sarah</option>
+        //                 <option value="eliza">Eliza</option>
+        //                 <option value="lisa">Lisa</option>
+        //                 <option value="liz">Liz</option>
+        //                 <option value="tyler">Tyler</option>
+        //             </select></p>
+        //         );
+        //     } else {
+        //         console.log(this);
+        //     }
+        // }
 
         const returnActive = () => { // maybe add npm react-toggle-switch (https://www.npmjs.com/package/react-toggle-switch)
             return (
-                <label key="isActive">
+                <label>
                     Is Active  
                     <input 
                         name="active" 
@@ -54,40 +55,43 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         }
 
         const returnDeliveryDay = () => {
-            return(
-                <p key="deliveryDay">Delivery Day: <select onChange={this.props.handleChange} name="deliveryDay" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                </select></p>
-            );
+            if (this.props.companyInfo["delivery_day"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
+                return(
+                    <p>Delivery Day: <select onChange={this.props.handleChange} name="deliveryDay" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                    </select></p>
+                );
+            }
         }
 
         const returnSpecialInstructions = () => {
             return (
-                <div key="specialInstructions">Special Instructions: <br /><br /> <textarea onChange={this.props.handleChange} name="specialInstructions" value={this.props.companyInfo["special_instructions"]}></textarea></div>
+                <div>Special Instructions: <br /><br /> <textarea onChange={this.props.handleChange} name="specialInstructions" value={this.props.companyInfo["special_instructions"]}></textarea></div>
             );
         }
 
-        const attributeList = Object.keys(this.props.companyInfo);
         return (
             <React.Fragment>
                 <h1>Account Details</h1>
                 <form>
-                    {attributeList.map((attr) => {
-                        if (attr === "manager") {
-                            return returnAccountManager();
-                        } else if (attr === "active") {
-                            return returnActive();
-                        } else if (attr === "delivery_day") {
-                            return returnDeliveryDay();
-                        } else if (attr === "special_instructions") {
-                            return returnSpecialInstructions();
-                        } else {
-                            return returnCompanyInfo(attr);
-                        }
-                    })}
+                    {returnActive()}
+                    {returnCompanyInfo("company_name")}
+                    {returnCompanyInfo("company_address")}
+                    {returnCompanyInfo("company_city")}
+                    {returnCompanyInfo("company_zip_code")}
+                    {returnCompanyInfo("ctct_email_list")}
+                    {returnCompanyInfo("scheduling_contact_name")}
+                    {returnCompanyInfo("scheduling_contact_phone")}
+                    {returnCompanyInfo("scheduling_contact_email")}
+                    {returnCompanyInfo("hr_contact_name")}
+                    {returnCompanyInfo("hr_contact_phone")}
+                    {returnCompanyInfo("hr_contact_email")}
+                    {returnDeliveryDay()}
+                    {returnCompanyInfo("delivery_time")}
+                    {returnSpecialInstructions()}
                 <button onClick={this.props.handleSubmit}>Submit Changes</button>
                 </form>
             </React.Fragment>

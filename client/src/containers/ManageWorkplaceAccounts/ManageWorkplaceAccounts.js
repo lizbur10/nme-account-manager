@@ -18,7 +18,7 @@ class WorkplaceAccountContainer extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/workplace_accounts/1', {
+        fetch('/workplace_accounts/1', { // NEED TO UN-DUMMY
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -28,8 +28,6 @@ class WorkplaceAccountContainer extends Component {
     }
 
     render () {
-        console.log(JSON.stringify(this.state));
-
         return (
             <React.Fragment>
                 <WorkplaceAccount 
@@ -41,7 +39,7 @@ class WorkplaceAccountContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('/workplace_accounts/1')
+        fetch('/workplace_accounts/1') // NEED TO UN-DUMMY
           .then(response => response.json())
           .then(data => {
             this.setState({
