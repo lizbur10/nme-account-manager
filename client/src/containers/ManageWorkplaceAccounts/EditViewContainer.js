@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WorkplaceAccount from '../../components/WorkplaceAccount/WorkplaceAccount';
+import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class WorkplaceAccountContainer extends Component {
     state = {
