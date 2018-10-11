@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Layout from './components/Layout/Layout';
-import WorkplaceAccountContainer from './containers/ManageWorkplaceAccounts/EditViewContainer';
+import WorkplaceAccountListContainer from './containers/ManageWorkplaceAccounts/ListViewContainer';
 
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <WorkplaceAccountContainer />
+          <WorkplaceAccountListContainer />
         </Layout>
       </div>
     );

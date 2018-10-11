@@ -1,4 +1,9 @@
 class WorkplaceAccountsController < ApplicationController
+    def index
+        @workplace_accounts=WorkplaceAccount.all
+        render json: @workplace_accounts
+    end
+
     def show
         @workplace_account = WorkplaceAccount.find(params[:id])
         render json: @workplace_account

@@ -1,3 +1,6 @@
+import React from 'react';
+import WorkplaceAccountList from '../../components/WorkplaceAccount/listView';
+
 class WorkplaceAccountListContainer extends React.Component {
     constructor() {
       super()
@@ -8,7 +11,7 @@ class WorkplaceAccountListContainer extends React.Component {
     }
    
     componentDidMount() {
-      fetch('')
+      fetch('/workplace_accounts')
         .then(response => response.json())
         .then(workplaceAccounts => this.setState({ workplaceAccounts }))
     }
@@ -17,3 +20,5 @@ class WorkplaceAccountListContainer extends React.Component {
       return <WorkplaceAccountList workplaceAccounts={this.state.workplaceAccounts} />
     }
   }
+
+  export default WorkplaceAccountListContainer;
