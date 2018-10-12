@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import WorkplaceAccountListContainer from './containers/ManageWorkplaceAccounts/ListViewContainer';
 
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <WorkplaceAccountListContainer />
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <div>
+      <WorkplaceAccountListContainer />
+    </div>
+  );
 }
 
 export default App;
