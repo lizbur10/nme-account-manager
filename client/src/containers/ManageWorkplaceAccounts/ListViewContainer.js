@@ -15,9 +15,17 @@ class WorkplaceAccountListContainer extends React.Component {
         .then(response => response.json())
         .then(workplaceAccounts => this.setState({ workplaceAccounts }))
     }
-   
+
+    // WORK IN PROGRESS
+    handleClick = event => {
+      event.preventDefault();
+      console.log(event);
+      const url='workplace_accounts/1';
+      fetch(url) 
+  }
+
     render() {
-      return <WorkplaceAccountList workplaceAccounts={this.state.workplaceAccounts} />
+      return <WorkplaceAccountList workplaceAccounts={this.state.workplaceAccounts} handleClick={this.handleClick}/>
     }
   }
 

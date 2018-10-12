@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const WorkplaceAccountSummary = ({ company_id, company_name, company_city }) => (
-    <div>
-      <p>{company_name}, {company_city}</p>
-    </div>
-)
+class WorkplaceAccountSummary extends Component {
+  render () {
+    return (
+      <div>
+        <p>{this.props.company_name}, {this.props.company_city}<button onClick={this.props.handleClick}>Edit </button></p>
+      </div>
+    )
+  }
+}
 
 export default WorkplaceAccountSummary;
