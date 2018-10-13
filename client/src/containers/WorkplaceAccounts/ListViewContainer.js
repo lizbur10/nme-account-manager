@@ -11,6 +11,7 @@ class WorkplaceAccountListContainer extends React.Component {
     }
    
     componentDidMount() {
+      console.log(this.props);
       fetch('/workplace_accounts')
         .then(response => response.json())
         .then(workplaceAccounts => this.setState({ workplaceAccounts }))

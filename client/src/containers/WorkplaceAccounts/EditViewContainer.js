@@ -29,16 +29,15 @@ class WorkplaceAccountContainer extends Component {
 
     render () {
         return (
-            <React.Fragment>
-                <WorkplaceAccount 
-                    companyInfo={this.state.workplace_account} 
-                    handleChange={this.handleChange} 
-                    handleSubmit={this.handleSubmit} /> 
-            </React.Fragment>
+            <WorkplaceAccount 
+                companyInfo={this.state.workplace_account} 
+                handleChange={this.handleChange} 
+                handleSubmit={this.handleSubmit} /> 
         );
     }
 
     componentDidMount() {
+        console.log(this.props);
         fetch('/workplace_accounts/1') // NEED TO UN-DUMMY
           .then(response => response.json())
           .then(data => {

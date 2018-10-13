@@ -9,7 +9,8 @@ import WorkplaceAccount from './components/WorkplaceAccount/fullInfo';
 ReactDOM.render((
     <Router>
         <React.Fragment>
-            <Route path="/" component={App} />
+            {/* SWITCH ROOT TO LOGIN PAGE; MOVE CURRENT App COMPONENT TO '/workplace_accounts */}
+            <Route path="/" component={App} /> 
             <Route exact path="/workplace_accounts/:id" component={WorkplaceAccount} />
         </React.Fragment>
     </Router>),
