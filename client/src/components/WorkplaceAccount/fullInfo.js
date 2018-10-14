@@ -9,16 +9,17 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
             return varName.replace(/_/g, " ").replace("ctct", "CTCT").replace(/hr/, "HR").split(/\s/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
         }
 
-        const returnCompanyInfo = (companyInfoKey) => {
-            let inputValue;
-
-            if (this.props.companyInfo[companyInfoKey] == null) {
-                inputValue=' ';
+        const handleBlank = (fieldName) => {
+            if (this.props.companyInfo[fieldName] == null) {
+                return " ";
             } else {
-                inputValue = this.props.companyInfo[companyInfoKey]
+                return this.props.companyInfo[fieldName];
             }
+        }
+
+        const returnCompanyInfo = (companyInfoKey) => {
             return(
-                <p>{labelMaker(companyInfoKey)}: <input onChange={this.props.handleChange} type="text" name={companyInfoKey} value={inputValue} /></p>
+                <p>{labelMaker(companyInfoKey)}: <input onChange={this.props.handleChange} type="text" name={companyInfoKey} value={handleBlank(companyInfoKey)} /></p>
             );
         }
 
@@ -48,7 +49,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
                     <input 
                         name="active" 
                         type="checkbox" 
-                        checked={this.props.companyInfo["active"]} 
+                        checked={!!this.props.companyInfo["active"]} 
                         onChange={this.props.handleChange} />
                 </label>
             )
@@ -68,14 +69,19 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         }
 
         const returnSpecialInstructions = () => {
+
             return (
-                <div>Special Instructions: <br /><br /> <textarea onChange={this.props.handleChange} name="specialInstructions" value={this.props.companyInfo["special_instructions"]}></textarea></div>
+                <div>Special Instructions: <br /><br /> 
+                    <textarea onChange={this.props.handleChange} 
+                    name="specialInstructions" 
+                    value={handleBlank("special_instructions")}></textarea>
+                </div>
             );
         }
 
         return (
             <React.Fragment>
-                <h1>Account Details</h1>
+                <h2>Account Details</h2>
                 <form>
                     {returnActive()}
                     {returnCompanyInfo("company_name")}
