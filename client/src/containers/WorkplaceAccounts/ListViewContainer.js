@@ -9,7 +9,7 @@ class WorkplaceAccountListContainer extends React.Component {
         workplaceAccounts: []
       };
     }
-   
+
     componentDidMount() {
       console.log(this.props);
       fetch('/workplace_accounts')
@@ -21,8 +21,8 @@ class WorkplaceAccountListContainer extends React.Component {
     handleClick = event => {
       event.preventDefault();
       console.log(event);
-      const url='workplace_accounts/1';
-      fetch(url) 
+      const url='workplace_accounts/' + event.target.value;
+      window.location.assign(url); 
   }
 
     render() {
