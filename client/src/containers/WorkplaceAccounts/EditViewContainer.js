@@ -18,7 +18,7 @@ class WorkplaceAccountContainer extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/workplace_accounts/1', { // NEED TO UN-DUMMY
+        fetch('/workplace_accounts/' + this.props.match.params.id, { 
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -37,8 +37,7 @@ class WorkplaceAccountContainer extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
-        fetch('/workplace_accounts/1') // NEED TO UN-DUMMY
+        fetch('/workplace_accounts/' + this.props.match.params.id) 
           .then(response => response.json())
           .then(data => {
             this.setState({

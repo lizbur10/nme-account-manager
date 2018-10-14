@@ -9,6 +9,7 @@ class WorkplaceAccountList extends Component {
         { this.props.workplaceAccounts.map(workplaceAccount => 
           <WorkplaceAccountSummary 
             key={workplaceAccount.id} 
+            id={workplaceAccount.id}
             company_name={workplaceAccount.company_name} 
             company_city={workplaceAccount.company_city}
             handleClick={this.props.handleClick} />) }
