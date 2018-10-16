@@ -17,7 +17,6 @@ class WorkplaceAccountListContainer extends React.Component {
         .then(workplaceAccounts => this.setState({ workplaceAccounts }))
     }
 
-    // WORK IN PROGRESS
     handleClick = event => {
       event.preventDefault();
       console.log(event);
