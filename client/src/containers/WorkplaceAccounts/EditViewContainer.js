@@ -25,6 +25,8 @@ class WorkplaceAccountContainer extends Component {
             },
             body: JSON.stringify(this.state)
         })
+        window.location.assign('/workplace_accounts'); 
+
     }
 
     render () {
