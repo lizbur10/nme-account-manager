@@ -58,7 +58,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         const returnDeliveryDay = () => {
             if (this.props.companyInfo["delivery_day"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
                 return(
-                    <p>Delivery Day: <select onChange={this.props.handleChange} name="deliveryDay" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
+                    <p>Delivery Day: <select onChange={this.props.handleChange} name="delivery_day" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
                         <option value="wednesday">Wednesday</option>
