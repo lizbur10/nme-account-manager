@@ -5,7 +5,7 @@ class WorkplaceAccountList extends Component {
   render () {
     return (
       <div>
-        <h2>Workplace Accounts:</h2>
+        <h2>Workplace Accounts</h2>
           <table>
             <tbody>
               <tr>
