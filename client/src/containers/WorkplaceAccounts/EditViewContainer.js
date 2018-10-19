@@ -25,7 +25,8 @@ class WorkplaceAccountContainer extends Component {
             },
             body: JSON.stringify(this.state)
         })
-        window.location.assign('/workplace_accounts'); 
+        alert('Account successfully updated');
+        this.props.history.push('/workplace_accounts');
 
     }
 
