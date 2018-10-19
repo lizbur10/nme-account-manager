@@ -18,8 +18,7 @@ class WorkplaceAccountList extends Component {
                 delivery_day={workplaceAccount.delivery_day}
                 manager={workplaceAccount.manager["name"]}
                 company_name={workplaceAccount.company_name} 
-                company_city={workplaceAccount.company_city}
-                handleClick={this.props.handleClick} />) }
+                company_city={workplaceAccount.company_city} />) }
 
             </tbody>
           </table>

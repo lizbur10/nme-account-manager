@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class WorkplaceAccountSummary extends Component {
   render () {
@@ -9,9 +10,10 @@ class WorkplaceAccountSummary extends Component {
         <td>{this.props.manager}</td>
         <td>{this.props.company_name}</td>
         <td>{this.props.company_city}</td>
-          <td><button onClick={this.props.handleClick} value={this.props.id}>
-            Edit 
-          </button></td>
+        <td><Link className="edit_button" to={{
+            pathname: "/workplace_accounts/" + this.props.id
+          }}>Edit</Link>
+        </td>
       </tr>
     )
   }
