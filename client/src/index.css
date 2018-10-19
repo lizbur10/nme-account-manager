@@ -8,7 +8,7 @@ form {
   border: 1px solid #ccc;
   box-shadow: 3px 3px 3px #aaa;
   width: 500px;
-  padding: 0 16px 16px;
+  padding: 16px;
 }
 
 header ul {
@@ -38,6 +38,7 @@ header a:hover,
 header a:active,
 header a.active {
   background-color: #B5D578;
+  border-radius: 5px;
   color: white;
 }
 
@@ -52,6 +53,7 @@ button {
 
 table {
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 th, td {
@@ -88,11 +90,19 @@ td input[type="number"] {
   padding-left: 10px;
 }
 
-.edit_button {
+.edit-button {
   text-decoration: none;
   padding: 0 5px;
   margin: 0 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 75%;
+}
+
+.add-new-button {
+  text-decoration: none;
+  padding: 0 5px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

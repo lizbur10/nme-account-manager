@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import WorkplaceAccountSummary from '../../components/WorkplaceAccount/summaryInfo';
 
 class WorkplaceAccountList extends Component {
@@ -19,9 +21,9 @@ class WorkplaceAccountList extends Component {
                 manager={workplaceAccount.manager["name"]}
                 company_name={workplaceAccount.company_name} 
                 company_city={workplaceAccount.company_city} />) }
-
             </tbody>
           </table>
+          <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
       </div>
 
     )

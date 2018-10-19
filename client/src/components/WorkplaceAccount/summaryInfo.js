@@ -10,7 +10,7 @@ class WorkplaceAccountSummary extends Component {
         <td>{this.props.manager}</td>
         <td>{this.props.company_name}</td>
         <td>{this.props.company_city}</td>
-        <td><Link className="edit_button" to={{
+        <td><Link className="edit-button" to={{
             pathname: "/workplace_accounts/" + this.props.id
           }}>Edit</Link>
         </td>
