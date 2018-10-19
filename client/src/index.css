@@ -1,5 +1,5 @@
 body {
-  margin: 24px;
+  margin: 24px 48px;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
 }
@@ -9,6 +9,36 @@ form {
   box-shadow: 3px 3px 3px #aaa;
   width: 500px;
   padding: 0 16px 16px;
+}
+
+header ul {
+  list-style: none;
+  margin-left: 0;
+  padding-inline-start: 0;
+  /* width: 100%; */
+  /* text-align: center; */
+}
+
+header li {
+  display: inline-block;
+  margin: 20px;
+}
+
+header li:first-of-type {
+  margin-left: 0;
+}
+
+header a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+header a:hover,
+header a:active,
+header a.active {
+  background-color: #B5D578;
+  color: white;
 }
 
 textarea {
@@ -58,3 +88,11 @@ td input[type="number"] {
   padding-left: 10px;
 }
 
+.edit_button {
+  text-decoration: none;
+  padding: 0 5px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 75%;
+}
