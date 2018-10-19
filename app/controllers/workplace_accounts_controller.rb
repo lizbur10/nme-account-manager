@@ -1,6 +1,8 @@
 class WorkplaceAccountsController < ApplicationController
     def index
-        @workplace_accounts=WorkplaceAccount.all
+        @workplace_accounts = WorkplaceAccount.all.sort_by do |account|
+            [to_day_of_week(account.delivery_day), account.manager.name, to_start_time(account.delivery_time)]
+        end
         render json: @workplace_accounts
     end
 
@@ -37,4 +39,17 @@ def account_params
         :delivery_time,
         :special_instructions
     )
+end
+
+def to_day_of_week(day)
+    Date.parse(day,"%w")
+end
+
+def to_start_time(window)
+    start_hour = window.match(/\d{1,2}/)[0]
+    if start_hour.to_i < 6
+        return start_hour.to_i + 12
+    else
+        return start_hour.to_i
+    end
 end

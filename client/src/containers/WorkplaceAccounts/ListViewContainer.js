@@ -14,40 +14,8 @@ class WorkplaceAccountListContainer extends React.Component {
       console.log(this.props);
       fetch('/workplace_accounts')
         .then(response => response.json())
-        .then(this.sortData)
         .then(workplaceAccounts => this.setState({ workplaceAccounts }))
   }
-
-    sortData = ( data ) => {
-      this.sortByDay(data, this.getDaySortVal);
-      // this.sortByManager(data);
-      return data;
-    }
-
-    sortByDay = ( data, getDaySortVal ) => {
-      data.sort(function(a,b){
-        a = getDaySortVal(a['delivery_day']);
-        b = getDaySortVal(b['delivery_day']);
-        return ( a > b );
-      });
-    }
-
-    getDaySortVal = stringVal => {
-      switch(stringVal) {
-        case 'monday':
-          return 0;
-        case 'tuesday':
-          return 1;
-        case 'wednesday':
-          return 2;
-        case 'thursday':
-          return 3;
-        case 'friday':
-          return 4;
-        default:
-          return 5;
-      }
-    }
 
     handleClick = event => {
       event.preventDefault();
