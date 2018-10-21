@@ -8,7 +8,7 @@ class WorkplaceAccountSummary extends Component {
       <tr>
         <td>
           <label className="switch">
-            <input type="checkbox" checked={this.props.active} onChange={this.props.toggleSwitch} />
+            <input type="checkbox" checked={this.props.active} onChange={() => this.props.toggleSwitch(this.props.id, !this.props.active)} />
             <span className="slider"></span>
           </label>
         </td>

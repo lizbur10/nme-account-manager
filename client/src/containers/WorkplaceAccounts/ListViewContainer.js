@@ -10,15 +10,27 @@ class WorkplaceAccountListContainer extends React.Component {
       };
     }
 
-    toggleSwitch = event => {
-      // NEED TO SWITCH THIS TO A FETCH REQUEST (USING THE WORKPLACE ID) THEN UPDATE THE STATE
+    toggleSwitch = (id, active) => {
       this.setState({
-          workplace_accounts: {
-              ...this.state.workplace_accounts,
-              active: !event.target.checked
-          }
+        workplaceAccounts: this.state.workplaceAccounts.map(account => 
+          (account.id === id ? Object.assign({}, account, { active }) : account))
+      }, function () {
+        this.persistUpdate(id);
       })
-  }
+    }
+
+    persistUpdate = (id) => {
+      let accountIndex = this.state.workplaceAccounts.findIndex(function(account) {
+        return account.id === id;
+      })  
+        fetch('/workplace_accounts/' + id, { 
+          method: "PATCH",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state.workplaceAccounts[accountIndex])
+        })
+    }
 
     componentDidMount() {
       fetch('/workplace_accounts')
