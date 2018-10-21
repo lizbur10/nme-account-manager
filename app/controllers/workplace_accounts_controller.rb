@@ -11,8 +11,11 @@ class WorkplaceAccountsController < ApplicationController
         render json: @workplace_account
     end
 
+    def create
+        WorkplaceAccount.create(account_params)
+    end
+
     def update
-        puts params
         @workplace_account = WorkplaceAccount.find(params[:id])
         @workplace_account.update_attributes(account_params)
     end
@@ -23,7 +26,8 @@ private
 def account_params
     params.require(:workplace_account).permit(
         :id,
-        :active, 
+        :active,
+        :manager_id, 
         :company_name,
         :company_address,
         :company_city,

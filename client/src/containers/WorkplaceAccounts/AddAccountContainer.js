@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
-class WorkplaceAccountContainer extends Component {
+class AddWorkplaceAccountContainer extends Component {
     state = {
         workplace_account: [] 
     }
@@ -18,22 +18,21 @@ class WorkplaceAccountContainer extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/workplace_accounts/' + this.props.match.params.id, { 
-            method: "PATCH",
+        fetch('/workplace_accounts', { 
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state)
-        })
-        alert('Account successfully updated');
-        this.props.history.push('/workplace_accounts');
-
+        }).then(
+            this.props.history.push('/workplace_accounts')
+        )
     }
 
     render () {
         return (
             <React.Fragment>
-                <h2>Account Details</h2>
+                <h2>Add New Account</h2>
                 <WorkplaceAccount 
                     companyInfo={this.state.workplace_account} 
                     handleChange={this.handleChange} 
@@ -42,15 +41,7 @@ class WorkplaceAccountContainer extends Component {
         );
     }
 
-    componentDidMount() {
-        fetch('/workplace_accounts/' + this.props.match.params.id) 
-          .then(response => response.json())
-          .then(data => {
-            this.setState({
-                workplace_account: data
-            })
-          })
-    }
+
 }
 
-export default WorkplaceAccountContainer;
+export default AddWorkplaceAccountContainer;

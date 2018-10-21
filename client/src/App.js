@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import WorkplaceAccountListContainer from './containers/WorkplaceAccounts/ListViewContainer';
 import WorkplaceAccountContainer from './containers/WorkplaceAccounts/EditViewContainer';
+import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddAccountContainer';
 
 class App extends Component {
   render () {
@@ -22,6 +23,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={WorkplaceAccountListContainer} />
           <Route exact path="/workplace_accounts" component={WorkplaceAccountListContainer} />
+          <Route exact path="/workplace_accounts/new" component={AddWorkplaceAccountContainer} />
           <Route exact path="/workplace_accounts/:id" component={WorkplaceAccountContainer} />
           <Route render={() => <h1>Page not found</h1>} />
         </Switch>

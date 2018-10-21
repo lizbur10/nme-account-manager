@@ -43,29 +43,37 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         // }
 
         const returnActive = () => { // maybe add npm react-toggle-switch (https://www.npmjs.com/package/react-toggle-switch)
-            return (
-                <label>
-                    Is Active  
-                    <input 
-                        name="active" 
-                        type="checkbox" 
-                        checked={!!this.props.companyInfo["active"]} 
-                        onChange={this.props.handleChange} />
-                </label>
-            )
+            // if (this.props.companyInfo["active"]) {
+                return (
+                    <label>
+                        Is Active  
+                        <input 
+                            name="active" 
+                            type="checkbox" 
+                            checked={!!this.props.companyInfo["active"]} 
+                            onChange={this.props.handleChange} />
+                    </label>
+                )
+    
+            // }
         }
 
         const returnDeliveryDay = () => {
+            let value;
             if (this.props.companyInfo["delivery_day"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
-                return(
-                    <p>Delivery Day: <select onChange={this.props.handleChange} name="delivery_day" value={this.props.companyInfo["delivery_day"].toLowerCase()} >
+                value=this.props.companyInfo["delivery_day"].toLowerCase();
+            } else {
+                value="select_day"
+            }
+            return(
+                    <p>Delivery Day: <select onChange={this.props.handleChange} name="delivery_day" value={value} >
+                        <option value="select_day">Select Day</option>
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
                         <option value="wednesday">Wednesday</option>
                         <option value="thursday">Thursday</option>
                     </select></p>
                 );
-            }
         }
 
         const returnSpecialInstructions = () => {
@@ -80,27 +88,24 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         }
 
         return (
-            <React.Fragment>
-                <h2>Account Details</h2>
-                <form>
-                    {returnActive()}
-                    {returnCompanyInfo("company_name")}
-                    {returnCompanyInfo("company_address")}
-                    {returnCompanyInfo("company_city")}
-                    {returnCompanyInfo("company_zip_code")}
-                    {returnCompanyInfo("ctct_email_list")}
-                    {returnCompanyInfo("scheduling_contact_name")}
-                    {returnCompanyInfo("scheduling_contact_phone")}
-                    {returnCompanyInfo("scheduling_contact_email")}
-                    {returnCompanyInfo("hr_contact_name")}
-                    {returnCompanyInfo("hr_contact_phone")}
-                    {returnCompanyInfo("hr_contact_email")}
-                    {returnDeliveryDay()}
-                    {returnCompanyInfo("delivery_time")}
-                    {returnSpecialInstructions()}
-                <button onClick={this.props.handleSubmit}>Submit Changes</button>
-                </form>
-            </React.Fragment>
+            <form>
+                {returnActive()}
+                {returnCompanyInfo("company_name")}
+                {returnCompanyInfo("company_address")}
+                {returnCompanyInfo("company_city")}
+                {returnCompanyInfo("company_zip_code")}
+                {returnCompanyInfo("ctct_email_list")}
+                {returnCompanyInfo("scheduling_contact_name")}
+                {returnCompanyInfo("scheduling_contact_phone")}
+                {returnCompanyInfo("scheduling_contact_email")}
+                {returnCompanyInfo("hr_contact_name")}
+                {returnCompanyInfo("hr_contact_phone")}
+                {returnCompanyInfo("hr_contact_email")}
+                {returnDeliveryDay()}
+                {returnCompanyInfo("delivery_time")}
+                {returnSpecialInstructions()}
+            <button onClick={this.props.handleSubmit}>Submit</button>
+            </form>
         );
     }
 };
