@@ -124,8 +124,8 @@ td input[type="number"] {
 .switch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 24px;
+  width: 34px;
+  height: 18px;
   margin-left: 5px;
 }
 
@@ -143,24 +143,25 @@ td input[type="number"] {
   right: 0;
   bottom: 0;
   background-color: #ccc;
+  border: 1px solid #ccc;
   -webkit-transition: .4s;
-  transition: .4s;
+  transition: .2s;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
+  height: 16px;
+  width: 16px;
+  left: 0;
+  bottom: 0;
   background-color: white;
   -webkit-transition: .4s;
-  transition: .4s;
+  transition: .2s;
 }
 
 input:checked + .slider {
-  background-color: green;
+  background-color: #75a020;
 }
 
 /* input:focus + .slider {
