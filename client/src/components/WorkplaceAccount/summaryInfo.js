@@ -9,7 +9,7 @@ class WorkplaceAccountSummary extends Component {
         <td>
           <label className="switch">
             <input type="checkbox" checked={this.props.active} onChange={this.props.toggleSwitch} />
-            <span className="slider round"></span>
+            <span className="slider"></span>
           </label>
         </td>
         <td>{delivery_day}</td>

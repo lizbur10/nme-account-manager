@@ -41,6 +41,7 @@ header li:first-of-type {
 
 header a {
   padding: 10px;
+  border: 2px solid white;
   text-decoration: none;
   color: black;
 }
@@ -51,6 +52,10 @@ header a.active {
   background-color: #B5D578;
   border-radius: 5px;
   color: white;
+}
+
+header a:hover {
+  border: 2px solid #94b749;
 }
 
 
@@ -144,6 +149,7 @@ td input[type="number"] {
   bottom: 0;
   background-color: #ccc;
   border: 1px solid #ccc;
+  border-radius: 34px;
   -webkit-transition: .4s;
   transition: .2s;
 }
@@ -156,6 +162,7 @@ td input[type="number"] {
   left: 0;
   bottom: 0;
   background-color: white;
+  border-radius: 50%;
   -webkit-transition: .4s;
   transition: .2s;
 }
@@ -172,13 +179,4 @@ input:checked + .slider:before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }

@@ -43,27 +43,19 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         // }
 
         const returnActive = () => { 
-            // if (this.props.companyInfo["active"]) {
-                return (
-                    <label>
-                        Account Active:
-                        <label className="switch">
-                            <input 
-                                name="active"
-                                type="checkbox" 
-                                checked={!!this.props.companyInfo["active"]} 
-                                onChange={this.props.handleChange} />
-                            <span className="slider round"></span>
-                        </label>
-                        {/* <input 
-                            name="active" 
+            return (
+                <label>
+                    Account Active:
+                    <label className="switch">
+                        <input 
+                            name="active"
                             type="checkbox" 
                             checked={!!this.props.companyInfo["active"]} 
-                            onChange={this.props.handleChange} /> */}
+                            onChange={this.props.handleChange} />
+                        <span className="slider"></span>
                     </label>
-                )
-    
-            // }
+                </label>
+            )
         }
 
         const returnDeliveryDay = () => {
