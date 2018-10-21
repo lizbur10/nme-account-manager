@@ -11,16 +11,18 @@ class WorkplaceAccountList extends Component {
           <table>
             <tbody>
               <tr>
-                <th>Day</th><th>Manager</th><th>Company Name</th><th>City</th>
+                <th>Active</th><th>Day</th><th>Manager</th><th>Company Name</th><th>City</th>
               </tr>
               { this.props.workplaceAccounts.map(workplaceAccount => 
               <WorkplaceAccountSummary 
                 key={workplaceAccount.id} 
                 id={workplaceAccount.id}
+                active={workplaceAccount.active}
                 delivery_day={workplaceAccount.delivery_day}
                 manager={workplaceAccount.manager["name"]}
                 company_name={workplaceAccount.company_name} 
-                company_city={workplaceAccount.company_city} />) }
+                company_city={workplaceAccount.company_city} 
+                toggleSwitch={this.props.toggleSwitch} />) }
             </tbody>
           </table>
           <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
