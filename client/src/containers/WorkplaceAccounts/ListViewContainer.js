@@ -48,10 +48,8 @@ class WorkplaceAccountListContainer extends React.Component {
 
     returnDay = (dayArray) => {
       if ( dayArray[0] ) {
-        console.log(dayArray[0]["delivery_day"])
         return dayArray[0]["delivery_day"].charAt(0).toUpperCase() + dayArray[0]["delivery_day"].slice(1)
             } else {
-        console.log('nope');
         return ' ';
       }
     } 
@@ -63,8 +61,6 @@ class WorkplaceAccountListContainer extends React.Component {
   }
 
     render() {
-      // const dayArray = this.separateDays();
-      // console.log(dayArray);
       return (
         <div>
           { this.separateDays().map( (day, i) =>
