@@ -8,7 +8,8 @@ class WorkplaceAccountListContainer extends React.Component {
       super()
    
       this.state = {
-        workplaceAccounts: []
+        workplaceAccounts: [],
+        managers: []
       };
     }
 
@@ -54,11 +55,25 @@ class WorkplaceAccountListContainer extends React.Component {
       }
     } 
 
+    listManagerOptions = () => {
+      let options="";
+      this.state.managers.map(manager =>
+        options += '<option value="' + manager.name + '">' + manager.name.charAt(0).toUpperCase() + manager.name.slice(1) + '</option>'
+        )
+      return options;
+    }
+
     componentDidMount() {
-      fetch('/workplace_accounts')
-        .then(response => response.json())
-        .then(workplaceAccounts => this.setState({ workplaceAccounts }))
-  }
+      Promise.all([
+          fetch('/workplace_accounts'),
+          fetch('/managers')
+      ])
+      .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+      .then(([data1, data2]) => this.setState({
+          workplaceAccounts: data1, 
+          managers: data2
+      }));
+    }
 
     render() {
       return (
@@ -66,7 +81,9 @@ class WorkplaceAccountListContainer extends React.Component {
           { this.separateDays().map( (day, i) =>
               <div key={i}>
                 <h2>{this.returnDay(day)}</h2>
-                <WorkplaceAccountList workplaceAccounts={day} toggleSwitch={this.toggleSwitch} />
+                <WorkplaceAccountList 
+                  workplaceAccounts={day} 
+                  toggleSwitch={this.toggleSwitch} />
               </div> 
           )}
         <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>

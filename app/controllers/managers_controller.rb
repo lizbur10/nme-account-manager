@@ -6,7 +6,9 @@ class ManagersController < ApplicationController
     end
 
     def index
-        @managers = Manager.all
+        @managers = Manager.all.sort_by do | manager |
+            [manager.name]
+        end
         render json: @managers
     end
 end

@@ -23,25 +23,6 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
             );
         }
 
-        // MOVE MANAGER EDITING FUNCTIONALITY TO ACCOUNT LIST PAGE
-        // const returnAccountManager = () => {
-            
-        //     if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
-        //         return (
-        //             <p key="accountManager">Account Manager: <select onChange={this.props.handleChange} name="accountManager" value={this.props.companyInfo["manager"]["name"].toLowerCase()} >
-        //                 <option value="gordon">Gordon</option>
-        //                 <option value="sarah">Sarah</option>
-        //                 <option value="eliza">Eliza</option>
-        //                 <option value="lisa">Lisa</option>
-        //                 <option value="liz">Liz</option>
-        //                 <option value="tyler">Tyler</option>
-        //             </select></p>
-        //         );
-        //     } else {
-        //         console.log(this);
-        //     }
-        // }
-
         const returnActive = () => { 
             return (
                 <label>
