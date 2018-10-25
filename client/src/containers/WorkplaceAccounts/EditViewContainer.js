@@ -3,7 +3,8 @@ import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class WorkplaceAccountContainer extends Component {
     state = {
-        workplace_account: [] 
+        workplace_account: [],
+        managers: []
     }
 
     handleChange = event => {
@@ -36,6 +37,7 @@ class WorkplaceAccountContainer extends Component {
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
                     companyInfo={this.state.workplace_account} 
+                    managers={this.state.managers}
                     handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
@@ -43,13 +45,15 @@ class WorkplaceAccountContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('/workplace_accounts/' + this.props.match.params.id) 
-          .then(response => response.json())
-          .then(data => {
-            this.setState({
-                workplace_account: data
-            })
-          })
+        Promise.all([
+            fetch('/workplace_accounts/' + this.props.match.params.id),
+            fetch('/managers')
+        ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(([data1, data2]) => this.setState({
+            workplace_account: data1, 
+            managers: data2
+        }));
     }
 }
 

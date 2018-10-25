@@ -8,8 +8,7 @@ class WorkplaceAccountListContainer extends React.Component {
       super()
    
       this.state = {
-        workplaceAccounts: [],
-        managers: []
+        workplaceAccounts: []
       };
     }
 
@@ -55,25 +54,15 @@ class WorkplaceAccountListContainer extends React.Component {
       }
     } 
 
-    listManagerOptions = () => {
-      let options="";
-      this.state.managers.map(manager =>
-        options += '<option value="' + manager.name + '">' + manager.name.charAt(0).toUpperCase() + manager.name.slice(1) + '</option>'
-        )
-      return options;
-    }
-
     componentDidMount() {
-      Promise.all([
-          fetch('/workplace_accounts'),
-          fetch('/managers')
-      ])
-      .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-      .then(([data1, data2]) => this.setState({
-          workplaceAccounts: data1, 
-          managers: data2
-      }));
-    }
+      fetch('/workplace_accounts') 
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+            workplaceAccounts: data
+        })
+      })
+}
 
     render() {
       return (

@@ -39,6 +39,33 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
             )
         }
 
+        const createManagerList = () => {
+            let options=[];
+            this.props.managers.map(manager =>
+              options.push(<option value={manager.name.toLowerCase()}>{manager.name.charAt(0).toUpperCase() + manager.name.slice(1)}</option>)
+            )
+            return options;
+    
+        }
+
+        const returnManagerSelect = () => {
+            let value;
+            if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
+                value=this.props.companyInfo["manager"]["name"].toLowerCase();
+            } else {
+                value="select_manager"
+            }
+            return(
+                <p>Account Manager: 
+                    <select onChange={this.props.handleChange} 
+                        name="manager" 
+                        value={value} >
+                            <option value="select_manager">Select Manager</option>
+                            {createManagerList()}
+           </select></p>
+            )
+        }
+
         const returnDeliveryDay = () => {
             let value;
             if (this.props.companyInfo["delivery_day"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
@@ -47,13 +74,17 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
                 value="select_day"
             }
             return(
-                    <p>Delivery Day: <select onChange={this.props.handleChange} name="delivery_day" value={value} >
-                        <option value="select_day">Select Day</option>
-                        <option value="monday">Monday</option>
-                        <option value="tuesday">Tuesday</option>
-                        <option value="wednesday">Wednesday</option>
-                        <option value="thursday">Thursday</option>
-                    </select></p>
+                    <p>Delivery Day: 
+                        <select onChange={this.props.handleChange} 
+                            name="delivery_day" 
+                            value={value} >
+                                <option value="select_day">Select Day</option>
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                        </select>
+                    </p>
                 );
         }
 
@@ -71,6 +102,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
         return (
             <form>
                 {returnActive()}
+                {returnManagerSelect()}
                 {returnCompanyInfo("company_name")}
                 {returnCompanyInfo("company_address")}
                 {returnCompanyInfo("company_city")}
