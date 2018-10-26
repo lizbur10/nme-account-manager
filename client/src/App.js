@@ -21,7 +21,7 @@ class App extends Component {
               <li><NavLink to="/workplace_accounts" >Workplace Wellness</NavLink></li>
               <li><NavLink to="/home_delivery_accounts" exact>Home Delivery</NavLink></li>
               <li><NavLink to="/catering_accounts" exact>Catering</NavLink></li>
-              <li><NavLink to="/admin" exact>Admin</NavLink></li>
+              <li><NavLink to="/managers" exact>Account Managers</NavLink></li>
             </ul>
           </nav>
         </header>
