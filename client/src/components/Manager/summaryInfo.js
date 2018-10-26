@@ -13,6 +13,7 @@ class ManagerSummary extends Component {
         </td>
         <td>{this.props.name}</td>
         <td>{this.props.email}</td>
+        <td>{this.props.phone}</td>
         <td><Link className="edit-button" to={{
             pathname: "/managers/" + this.props.id
           }}>Edit</Link>

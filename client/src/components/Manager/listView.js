@@ -9,7 +9,7 @@ class ManagerList extends Component {
         <table>
           <tbody>
             <tr>
-              <th>Active</th><th>Name</th><th>Email</th>
+              <th>Active</th><th>Name</th><th>Email</th><th>Phone</th>
             </tr>
             { this.props.managers.map(manager => 
             <ManagerSummary 
@@ -18,6 +18,7 @@ class ManagerList extends Component {
               active={manager.active}
               name={manager.name} 
               email={manager.email} 
+              phone={manager.phone}
               toggleSwitch={this.props.toggleSwitch} />) }
           </tbody>
         </table>
