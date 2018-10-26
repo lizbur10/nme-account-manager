@@ -43,7 +43,6 @@ class WorkplaceAccountListContainer extends React.Component {
         })
       }
       return dayArray;
-      // const managersArray = [...new Set(this.state.workplaceAccounts["manager"]["name"])];
     }
 
     returnDay = (dayArray) => {

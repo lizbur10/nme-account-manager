@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Switch } from 'react-router-dom';
 
+//WORKPLACE ACCOUNT IMPORTS
 import WorkplaceAccountListContainer from './containers/WorkplaceAccounts/ListViewContainer';
 import WorkplaceAccountContainer from './containers/WorkplaceAccounts/EditViewContainer';
 import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddAccountContainer';
+
+//MANAGER IMPORTS
+import ManagerListContainer from './containers/Managers/ListViewContainer';
+// import ManagerContainer from './containers/Managers/EditViewContainer';
+// import ManagerContainer from './containers/Managers/AddManagerContainer';
 
 class App extends Component {
   render () {
@@ -25,6 +31,7 @@ class App extends Component {
           <Route exact path="/workplace_accounts" component={WorkplaceAccountListContainer} />
           <Route exact path="/workplace_accounts/new" component={AddWorkplaceAccountContainer} />
           <Route exact path="/workplace_accounts/:id" component={WorkplaceAccountContainer} />
+          <Route exact path="/managers" component={ManagerListContainer} />
           <Route render={() => <h1>Page not found</h1>} />
         </Switch>
       </div>
