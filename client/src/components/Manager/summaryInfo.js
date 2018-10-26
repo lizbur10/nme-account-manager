@@ -11,6 +11,7 @@ class ManagerSummary extends Component {
             <span className="slider"></span>
           </label>
         </td>
+        <td>{this.props.market}</td>
         <td>{this.props.name}</td>
         <td>{this.props.email}</td>
         <td>{this.props.phone}</td>

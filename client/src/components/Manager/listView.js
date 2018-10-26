@@ -9,13 +9,14 @@ class ManagerList extends Component {
         <table>
           <tbody>
             <tr>
-              <th>Active</th><th>Name</th><th>Email</th><th>Phone</th>
+              <th>Active</th><th>Market</th><th>Name</th><th>Email</th><th>Phone</th>
             </tr>
             { this.props.managers.map(manager => 
             <ManagerSummary 
               key={manager.id} 
               id={manager.id}
               active={manager.active}
+              market={manager.market.name}
               name={manager.name} 
               email={manager.email} 
               phone={manager.phone}

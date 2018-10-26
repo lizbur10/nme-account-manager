@@ -26,13 +26,13 @@ class ManagersController < ApplicationController
     def manager_params
         params.require(:manager).permit(
             :id,
-            :market_id,
             :active,
+            :market_id,
             :name,
-            :username,
-            :password,
             :email,
-            :phone
+            :phone,
+            :username,
+            :password
 
         )
     end
