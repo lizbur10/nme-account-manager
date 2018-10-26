@@ -1,5 +1,6 @@
 class ManagerSerializer < ActiveModel::Serializer
   attributes :id,
+    :active,
     :name,
     :username,
     :password,
