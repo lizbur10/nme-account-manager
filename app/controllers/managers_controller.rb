@@ -31,8 +31,8 @@ class ManagersController < ApplicationController
             :name,
             :username,
             :password,
-            :contact_info,
-            :company_zip_code
+            :email,
+            :phone
 
         )
     end

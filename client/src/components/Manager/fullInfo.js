@@ -66,7 +66,8 @@ class Manager extends Component { //used class instead of const to enable prop-t
                 {returnActive()}
                 {returnMarket()}
                 {returnManagerInfo("name")}
-                {returnManagerInfo("contact_info")}
+                {returnManagerInfo("email")}
+                {returnManagerInfo("phone")}
             <button onClick={this.props.handleSubmit}>Submit</button>
             </form>
         );

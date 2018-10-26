@@ -17,7 +17,7 @@ class ManagerList extends Component {
               id={manager.id}
               active={manager.active}
               name={manager.name} 
-              email={manager.contact_info} 
+              email={manager.email} 
               toggleSwitch={this.props.toggleSwitch} />) }
           </tbody>
         </table>

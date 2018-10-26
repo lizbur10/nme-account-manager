@@ -38,7 +38,7 @@ WorkplaceAccount.create(
 
 # DATA_managers = {
 #     :manager_keys =>
-#         ["name", "contact_info", "username", "password"],
+#         ["name", "email", "username", "password"],
 #     :boston_managers => [
 #         ['Sarah', 'sarah@9mileseast.com', 'sarah', 'password'],
 #         ['Eliza', 'eliza@9mileseast.com', 'eliza', 'password'],

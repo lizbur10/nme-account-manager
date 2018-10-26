@@ -3,8 +3,9 @@ class ManagerSerializer < ActiveModel::Serializer
     :active,
     :market,
     :name,
+    :email,
+    :phone,
     :username,
-    :password,
-    :contact_info
+    :password
   has_many :workplace_accounts
 end
