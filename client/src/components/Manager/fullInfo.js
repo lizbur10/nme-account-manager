@@ -16,7 +16,7 @@ class Manager extends Component { //used class instead of const to enable prop-t
 
         const handleBlank = (fieldName) => {
             if (this.props.managerInfo[fieldName] == null) {
-                return " ";
+                return "";
             } else {
                 return this.props.managerInfo[fieldName];
             }

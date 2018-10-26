@@ -11,7 +11,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const handleBlank = (fieldName) => {
             if (this.props.companyInfo[fieldName] == null) {
-                return " ";
+                return "";
             } else {
                 return this.props.companyInfo[fieldName];
             }
