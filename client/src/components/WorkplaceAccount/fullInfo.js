@@ -41,8 +41,8 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const createManagerList = () => {
             let options=[];
-            this.props.managers.map(manager =>
-              options.push(<option value={manager.name.toLowerCase()}>{manager.name.charAt(0).toUpperCase() + manager.name.slice(1)}</option>)
+            this.props.managers.map( manager =>
+              options.push(<option key={manager.id} value={manager.name.toLowerCase()}>{manager.name.charAt(0).toUpperCase() + manager.name.slice(1)}</option>)
             )
             return options;
     
@@ -50,14 +50,10 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnManagerSelect = () => {
             let value;
-            if (this.props.companyInfo["manager"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
-                value=this.props.companyInfo["manager"]["name"].toLowerCase();
-            } else {
-                value="select_manager"
-            }
+            this.props.companyInfo["manager"] ? value=this.props.companyInfo["manager"]["name"].toLowerCase() : value = "select_manager";
             return(
                 <p>Account Manager: 
-                    <select onChange={this.props.handleChange} 
+                    <select onChange={this.props.handleReassignManager} 
                         name="manager" 
                         value={value} >
                             <option value="select_manager">Select Manager</option>
@@ -68,11 +64,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
 
         const returnDeliveryDay = () => {
             let value;
-            if (this.props.companyInfo["delivery_day"]) { // NEED TO FIGURE OUT WHY THIS IS NECESSARY TO AVOID 'UNDEFINED' ERROR
-                value=this.props.companyInfo["delivery_day"].toLowerCase();
-            } else {
-                value="select_day"
-            }
+            this.props.companyInfo["delivery_day"] ? value=this.props.companyInfo["delivery_day"].toLowerCase() : value="select_day"
             return(
                     <p>Delivery Day: 
                         <select onChange={this.props.handleChange} 

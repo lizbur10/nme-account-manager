@@ -17,6 +17,18 @@ class WorkplaceAccountContainer extends Component {
         })
     }
 
+    handleReassignManager = (event) => {
+        const newManager = this.state.managers.filter(manager =>
+            manager.name.toLowerCase() === event.target.value)[0];
+        this.setState({
+            workplace_account: {
+                ...this.state.workplace_account,
+                manager_id: newManager.id,
+                manager: newManager
+            }
+        })
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         fetch('/workplace_accounts/' + this.props.match.params.id, { 
@@ -24,9 +36,11 @@ class WorkplaceAccountContainer extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
-        })
-        alert('Account successfully updated');
+            body: JSON.stringify(this.state.workplace_account)
+        }).then(response => {
+            console.log(response)
+          })
+          .catch(error => console.log(error))
         this.props.history.push('/workplace_accounts');
 
     }
@@ -38,7 +52,8 @@ class WorkplaceAccountContainer extends Component {
                 <WorkplaceAccount 
                     companyInfo={this.state.workplace_account} 
                     managers={this.state.managers}
-                    handleChange={this.handleChange} 
+                    handleChange={this.handleChange}
+                    handleReassignManager={this.handleReassignManager} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );

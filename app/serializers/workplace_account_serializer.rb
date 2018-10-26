@@ -1,6 +1,7 @@
 class WorkplaceAccountSerializer < ActiveModel::Serializer
   attributes :id,
     :active,
+    :manager_id,
     :company_name,
     :company_address,
     :company_city,
