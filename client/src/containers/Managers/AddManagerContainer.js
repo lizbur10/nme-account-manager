@@ -3,7 +3,8 @@ import Manager from '../../components/Manager/fullInfo';
 
 class AddManagerContainer extends Component {
     state = {
-        manager: [] 
+        manager: [],
+        markets: [] 
     }
 
     handleChange = event => {
@@ -12,6 +13,18 @@ class AddManagerContainer extends Component {
             manager: {
                 ...this.state.manager,
                 [event.target.name]: value
+            }
+        })
+    }
+
+    handleReassignMarket = (event) => {
+        const newMarket = this.state.markets.filter(market =>
+            market.name.toLowerCase() === event.target.value)[0];
+        this.setState({
+            manager: {
+                ...this.state.manager,
+                market_id: newMarket.id,
+                market: newMarket
             }
         })
     }
@@ -29,6 +42,17 @@ class AddManagerContainer extends Component {
         )
     }
 
+    componentDidMount() {
+        fetch('/markets') 
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+              markets: data
+          })
+        })
+      }
+  
+
     render () {
         return (
             <React.Fragment>
@@ -36,6 +60,7 @@ class AddManagerContainer extends Component {
                 <Manager 
                     managerInfo={this.state.manager} 
                     handleChange={this.handleChange} 
+                    handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
