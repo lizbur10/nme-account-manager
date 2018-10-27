@@ -34,6 +34,26 @@ class ManagerListContainer extends React.Component {
       })
     }
 
+    separateMarkets = () => {
+      const marketsArray = ['albany', 'boston'];
+      const marketArray = [];
+      for (let i=0; i < marketsArray.length; i++) {
+        marketArray[i] = this.state.managers.filter(function (manager) {
+          return manager.market.name.toLowerCase() === marketsArray[i];
+        })
+      }
+      console.log(marketArray);
+      return marketArray;
+    }
+
+    returnMarket = (marketArray) => {
+      if ( marketArray[0] ) {
+        return marketArray[0].market.name.charAt(0).toUpperCase() + marketArray[0].market.name.slice(1)
+            } else {
+        return ' ';
+      }
+    } 
+
     componentDidMount() {
       fetch('/managers') 
       .then(response => response.json())
@@ -47,13 +67,15 @@ class ManagerListContainer extends React.Component {
     render() {
       return (
         <div>
-              <div>
-                <h2>Account Managers</h2>
+          { this.separateMarkets().map( (market, i) =>
+              <div key={i}>
+                <h2>Account Managers: {this.returnMarket(market)}</h2>
                 <ManagerList 
-                  managers={this.state.managers} 
+                  managers={market} 
                   toggleSwitch={this.toggleSwitch} />
               </div> 
-        <Link className="add-new-button" to="/managers/new">Add New Account Manager</Link>
+            )}
+            <Link className="add-new-button" to="/managers/new">Add New Account Manager</Link>
         
         </div>
       )

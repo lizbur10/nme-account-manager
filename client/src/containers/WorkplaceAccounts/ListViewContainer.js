@@ -38,8 +38,8 @@ class WorkplaceAccountListContainer extends React.Component {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
       for (let i=0; i < daysArray.length; i++) {
-        dayArray[i] = this.state.workplaceAccounts.filter(function (e) {
-          return e.delivery_day.toLowerCase() === daysArray[i];
+        dayArray[i] = this.state.workplaceAccounts.filter(function (account) {
+          return account.delivery_day.toLowerCase() === daysArray[i];
         })
       }
       return dayArray;
