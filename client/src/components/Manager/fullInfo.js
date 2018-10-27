@@ -44,7 +44,7 @@ class Manager extends Component { //used class instead of const to enable prop-t
             )
         }
 
-        const returnMarket = () => {
+        const returnMarketSelect = () => {
             let value;
             this.props.managerInfo["market"] ? value=this.props.managerInfo["market"]["name"].toLowerCase() : value = "select_market";
             return (
@@ -64,7 +64,7 @@ class Manager extends Component { //used class instead of const to enable prop-t
         return (
             <form>
                 {returnActive()}
-                {returnMarket()}
+                {returnMarketSelect()}
                 {returnManagerInfo("name")}
                 {returnManagerInfo("email")}
                 {returnManagerInfo("phone")}

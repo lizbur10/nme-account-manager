@@ -68,7 +68,7 @@ class ManagerContainer extends Component {
             manager: data1, 
             markets: data2
         }));
-        }
+    }
 }
 
 export default ManagerContainer;

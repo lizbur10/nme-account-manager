@@ -42,7 +42,7 @@ class ManagerListContainer extends React.Component {
             managers: data
         })
       })
-}
+    }
 
     render() {
       return (
