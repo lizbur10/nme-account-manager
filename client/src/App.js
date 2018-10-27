@@ -19,12 +19,12 @@ class App extends Component {
           <nav>
             <ul>
               <li><NavLink to="/workplace_accounts" >Workplace Wellness</NavLink></li>
-              <li><NavLink to="/home_delivery_accounts" exact>Home Delivery</NavLink></li>
-              <li><NavLink to="/catering_accounts" exact>Catering</NavLink></li>
-              <li><NavLink to="/managers" exact>Admin</NavLink></li>
+              <li><NavLink to="/home_delivery_accounts" >Home Delivery</NavLink></li>
+              <li><NavLink to="/catering_accounts" >Catering</NavLink></li>
+              <li><NavLink to="/managers" >Admin</NavLink></li>
             </ul>
           </nav>
-        </header>
+        </header> 
         <h1>9 Miles East Account Management</h1>
         <Switch>
           <Route exact path="/" component={WorkplaceAccountListContainer} />
