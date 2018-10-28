@@ -38,10 +38,10 @@ class ManagerContainer extends Component {
             },
             body: JSON.stringify(this.state.manager)
         }).then(response => {
-            console.log(response)
+            this.props.history.push('/managers');
+            console.log(response);
           })
           .catch(error => console.log(error))
-        this.props.history.push('/managers');
 
     }
 

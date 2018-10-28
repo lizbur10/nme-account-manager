@@ -38,10 +38,10 @@ class WorkplaceAccountContainer extends Component {
             },
             body: JSON.stringify(this.state.workplace_account)
         }).then(response => {
-            console.log(response)
+            this.props.history.push('/workplace_accounts');
+            console.log(response);
           })
           .catch(error => console.log(error))
-        this.props.history.push('/workplace_accounts');
 
     }
 

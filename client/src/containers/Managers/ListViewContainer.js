@@ -42,7 +42,6 @@ class ManagerListContainer extends React.Component {
           return manager.market.name.toLowerCase() === marketsArray[i];
         })
       }
-      console.log(marketArray);
       return marketArray;
     }
 
