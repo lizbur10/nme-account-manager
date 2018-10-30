@@ -9,8 +9,7 @@ class WorkplaceAccountListContainer extends React.Component {
     //   super()
    
     //   this.state = {
-    //     workplaceAccounts: [
-    //     ]
+    //     workplaceAccounts: []
     //   };
     // }
 

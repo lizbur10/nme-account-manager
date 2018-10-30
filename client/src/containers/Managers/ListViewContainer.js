@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ManagerList from '../../components/Manager/listView';
 
 class ManagerListContainer extends React.Component {
-    constructor() {
-      super()
+    // constructor() {
+    //   super()
    
-      this.state = {
-        managers: []
-      };
-    }
+    //   this.state = {
+    //     managers: []
+    //   };
+    // }
 
     toggleSwitch = (id, active) => {
       this.setState({
-        managers: this.state.managers.map(manager => 
+        managers: this.props.managers.map(manager => 
           (manager.id === id ? Object.assign({}, manager, { active }) : manager))
       }, function () {
         this.persistUpdate(id);
@@ -22,7 +23,7 @@ class ManagerListContainer extends React.Component {
     }
 
     persistUpdate = (id) => {
-      let managerIndex = this.state.managers.findIndex(function(manager) {
+      let managerIndex = this.props.managers.findIndex(function(manager) {
         return manager.id === id;
       })
       fetch('/managers/' + id, { 
@@ -30,7 +31,7 @@ class ManagerListContainer extends React.Component {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state.managers[managerIndex])
+        body: JSON.stringify(this.props.managers[managerIndex])
       })
     }
 
@@ -38,7 +39,7 @@ class ManagerListContainer extends React.Component {
       const marketsArray = ['albany', 'boston'];
       const marketArray = [];
       for (let i=0; i < marketsArray.length; i++) {
-        marketArray[i] = this.state.managers.filter(function (manager) {
+        marketArray[i] = this.props.managers.filter(function (manager) {
           return manager.market.name.toLowerCase() === marketsArray[i];
         })
       }
@@ -53,15 +54,15 @@ class ManagerListContainer extends React.Component {
       }
     } 
 
-    componentDidMount() {
-      fetch('/managers') 
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-            managers: data
-        })
-      })
-    }
+    // componentDidMount() {
+    //   fetch('/managers') 
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     this.setState({
+    //         managers: data
+    //     })
+    //   })
+    // }
 
     render() {
       return (
@@ -81,4 +82,11 @@ class ManagerListContainer extends React.Component {
     }
   }
 
-  export default ManagerListContainer;
+  const mapStateToProps = state => {
+    console.log(state.managers)
+    return {
+      managers: state.managers
+    };
+  };
+
+  export default connect(mapStateToProps)(ManagerListContainer);
