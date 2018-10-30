@@ -276,13 +276,14 @@ const initialState =
 
 const reducer = (state = initialState, action) => {
     const active = action.active;
-    if ( action.type === 'TOGGLE_ACTIVE' ) {
-        return (
-            state.map(account => 
-                (account.id === action.id ? Object.assign({}, account, { active }) : account))
+    switch (action.type) {
+        case 'TOGGLE_ACTIVE':
+            return (
+                state.map(account => 
+                    (account.id === action.id ? Object.assign({}, account, { active }) : account))
 
-        )
-    }          
+            )
+    }
     return state;
 }
 
