@@ -13,14 +13,14 @@ class WorkplaceAccountListContainer extends React.Component {
     //   };
     // }
 
-    toggleSwitch = (id, active) => {
-      this.setState({
-        workplaceAccounts: this.props.workplaceAccounts.map(account => 
-          (account.id === id ? Object.assign({}, account, { active }) : account))
-      }, function () {
-        this.persistUpdate(id);
-      })
-    }
+    // toggleSwitch = (id, active) => {
+    //   this.setState({
+    //     workplaceAccounts: this.props.workplaceAccounts.map(account => 
+    //       (account.id === id ? Object.assign({}, account, { active }) : account))
+    //   }, function () {
+    //     this.persistUpdate(id);
+    //   })
+    // }
 
     persistUpdate = (id) => {
       let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
@@ -72,7 +72,7 @@ class WorkplaceAccountListContainer extends React.Component {
                 <h2>{this.returnDay(day)}</h2>
                 <WorkplaceAccountList 
                   workplaceAccounts={day}
-                  toggleSwitch={this.toggleSwitch} />
+                  toggleSwitch={this.props.onToggleSwitch} />
               </div> 
           )}
         <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
@@ -88,10 +88,10 @@ class WorkplaceAccountListContainer extends React.Component {
     };
   };
 
-  // const mapDispatchToProps = dispatch => {
-  //   return {
+  const mapDispatchToProps = dispatch => {
+    return {
+        onToggleSwitch: (id, active) => dispatch({type: "TOGGLE_ACTIVE", id: id, active: active })
+    };
+  };
 
-  //   };
-  // };
-
-  export default connect(mapStateToProps)(WorkplaceAccountListContainer);
+  export default connect(mapStateToProps,mapDispatchToProps)(WorkplaceAccountListContainer);
