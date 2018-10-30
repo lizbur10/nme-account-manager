@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import WorkplaceAccountList from '../../components/WorkplaceAccount/listView';
 
 class WorkplaceAccountListContainer extends React.Component {
-    constructor() {
-      super()
+    // constructor() {
+    //   super()
    
-      this.state = {
-        workplaceAccounts: []
-      };
-    }
+    //   this.state = {
+    //     workplaceAccounts: [
+    //     ]
+    //   };
+    // }
 
     toggleSwitch = (id, active) => {
       this.setState({
-        workplaceAccounts: this.state.workplaceAccounts.map(account => 
+        workplaceAccounts: this.props.workplaceAccounts.map(account => 
           (account.id === id ? Object.assign({}, account, { active }) : account))
       }, function () {
         this.persistUpdate(id);
@@ -22,7 +24,7 @@ class WorkplaceAccountListContainer extends React.Component {
     }
 
     persistUpdate = (id) => {
-      let accountIndex = this.state.workplaceAccounts.findIndex(function(account) {
+      let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
         return account.id === id;
       })
       fetch('/workplace_accounts/' + id, { 
@@ -30,7 +32,7 @@ class WorkplaceAccountListContainer extends React.Component {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state.workplaceAccounts[accountIndex])
+        body: JSON.stringify(this.props.workplaceAccounts[accountIndex])
       })
     }
 
@@ -38,7 +40,7 @@ class WorkplaceAccountListContainer extends React.Component {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
       for (let i=0; i < daysArray.length; i++) {
-        dayArray[i] = this.state.workplaceAccounts.filter(function (account) {
+        dayArray[i] = this.props.workplaceAccounts.filter(function (account) {
           return account.delivery_day.toLowerCase() === daysArray[i];
         })
       }
@@ -53,15 +55,15 @@ class WorkplaceAccountListContainer extends React.Component {
       }
     } 
 
-    componentDidMount() {
-      fetch('/workplace_accounts') 
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-            workplaceAccounts: data
-        })
-      })
-}
+    // componentDidMount() {
+    //   fetch('/workplace_accounts') 
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     this.setState({
+    //         workplaceAccounts: data
+    //     })
+    //   })
+    // }
 
     render() {
       return (
@@ -70,7 +72,7 @@ class WorkplaceAccountListContainer extends React.Component {
               <div key={i}>
                 <h2>{this.returnDay(day)}</h2>
                 <WorkplaceAccountList 
-                  workplaceAccounts={day} 
+                  workplaceAccounts={day}
                   toggleSwitch={this.toggleSwitch} />
               </div> 
           )}
@@ -81,4 +83,16 @@ class WorkplaceAccountListContainer extends React.Component {
     }
   }
 
-  export default WorkplaceAccountListContainer;
+  const mapStateToProps = state => {
+    return {
+      workplaceAccounts: state.workplaceAccounts
+    };
+  };
+
+  // const mapDispatchToProps = dispatch => {
+  //   return {
+
+  //   };
+  // };
+
+  export default connect(mapStateToProps)(WorkplaceAccountListContainer);
