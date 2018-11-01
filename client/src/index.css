@@ -4,6 +4,9 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.inactive {
+  color: #ccc;
+}
 
 /* FORM & FORM ELEMENTS */
 

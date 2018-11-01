@@ -83,7 +83,6 @@ class ManagerListContainer extends React.Component {
   }
 
   const mapStateToProps = state => {
-    console.log(state.managers)
     return {
       managers: state.managers
     };
