@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types'; 
 
+// NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
+// TO REDUX IN EDITVIEWCONTAINER
+
 class Manager extends Component { //used class instead of const to enable prop-type validation
     render () {
 

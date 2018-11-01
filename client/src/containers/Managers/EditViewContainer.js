@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
 
+// NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
+// TO REDUX 
+
+
 class ManagerContainer extends Component {
     // state = {
     //     manager: [],
