@@ -289,7 +289,18 @@ const initialState =
 
 
 const reducer = (state = initialState, action) => {
-    return state;
+    const active = action.active;
+    switch (action.type) {
+        case 'TOGGLE_ACTIVE':
+            return (
+                state.map(manager => 
+                    (manager.id === action.id ? Object.assign({}, manager, { active }) : manager))
+
+            );
+        default: 
+            return state;
+    }
+
 }
 
 export default reducer;

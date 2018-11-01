@@ -13,14 +13,14 @@ class ManagerListContainer extends React.Component {
     //   };
     // }
 
-    toggleSwitch = (id, active) => {
-      this.setState({
-        managers: this.props.managers.map(manager => 
-          (manager.id === id ? Object.assign({}, manager, { active }) : manager))
-      }, function () {
-        this.persistUpdate(id);
-      })
-    }
+    // toggleSwitch = (id, active) => {
+    //   this.setState({
+    //     managers: this.props.managers.map(manager => 
+    //       (manager.id === id ? Object.assign({}, manager, { active }) : manager))
+    //   }, function () {
+    //     this.persistUpdate(id);
+    //   })
+    // }
 
     persistUpdate = (id) => {
       let managerIndex = this.props.managers.findIndex(function(manager) {
@@ -72,7 +72,7 @@ class ManagerListContainer extends React.Component {
                 <h2>Account Managers: {this.returnMarket(market)}</h2>
                 <ManagerList 
                   managers={market} 
-                  toggleSwitch={this.toggleSwitch} />
+                  toggleSwitch={this.props.onToggleSwitch} />
               </div> 
             )}
             <Link className="add-new-button" to="/managers/new">Add New Account Manager</Link>
@@ -88,4 +88,10 @@ class ManagerListContainer extends React.Component {
     };
   };
 
-  export default connect(mapStateToProps)(ManagerListContainer);
+  const mapDispatchToProps = dispatch => {
+    return {
+        onToggleSwitch: (id, active) => dispatch({type: "TOGGLE_ACTIVE", id: id, active: active })
+    };
+  };
+
+  export default connect(mapStateToProps, mapDispatchToProps)(ManagerListContainer);
