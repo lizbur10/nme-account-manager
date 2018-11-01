@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class AddWorkplaceAccountContainer extends Component {
     state = {
-        workplace_account: [],
-        managers: []
+        workplace_account: []
     }
 
     handleChange = event => {
@@ -18,7 +18,7 @@ class AddWorkplaceAccountContainer extends Component {
     }
 
     handleReassignManager = (event) => {
-        const newManager = this.state.managers.filter(manager =>
+        const newManager = this.props.managers.filter(manager =>
             manager.name.toLowerCase() === event.target.value)[0];
         this.setState({
             workplace_account: {
@@ -42,15 +42,15 @@ class AddWorkplaceAccountContainer extends Component {
         )
     }
 
-    componentDidMount() {
-        fetch('/managers') 
-        .then(response => response.json())
-        .then(data => {
-          this.setState({
-              managers: data
-          })
-        })
-    }
+    // componentDidMount() {
+    //     fetch('/managers') 
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       this.setState({
+    //           managers: data
+    //       })
+    //     })
+    // }
   
     render () {
         return (
@@ -58,7 +58,7 @@ class AddWorkplaceAccountContainer extends Component {
                 <h2>Add New Account</h2>
                 <WorkplaceAccount 
                     companyInfo={this.state.workplace_account} 
-                    managers={this.state.managers}
+                    managers={this.props.managers}
                     handleChange={this.handleChange} 
                     handleReassignManager={this.handleReassignManager}
                     handleSubmit={this.handleSubmit} /> 
@@ -69,4 +69,10 @@ class AddWorkplaceAccountContainer extends Component {
 
 }
 
-export default AddWorkplaceAccountContainer;
+const mapStateToProps = state => {
+    return {
+      managers: state.managers
+    };
+  };
+
+export default connect(mapStateToProps)(AddWorkplaceAccountContainer);
