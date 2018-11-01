@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class WorkplaceAccountContainer extends Component {
-    state = {
-        workplace_account: [],
-        managers: []
-    }
+    // state = {
+    //     workplace_account: [],
+    //     managers: []
+    // }
 
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
@@ -50,8 +51,8 @@ class WorkplaceAccountContainer extends Component {
             <React.Fragment>
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
-                    companyInfo={this.state.workplace_account} 
-                    managers={this.state.managers}
+                    companyInfo={this.props.workplaceAccount} 
+                    managers={this.props.managers}
                     handleChange={this.handleChange}
                     handleReassignManager={this.handleReassignManager} 
                     handleSubmit={this.handleSubmit} /> 
@@ -59,17 +60,27 @@ class WorkplaceAccountContainer extends Component {
         );
     }
 
-    componentDidMount() {
-        Promise.all([
-            fetch('/workplace_accounts/' + this.props.match.params.id),
-            fetch('/managers')
-        ])
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(([data1, data2]) => this.setState({
-            workplace_account: data1, 
-            managers: data2
-        }));
-    }
+    // componentDidMount() {
+    //     Promise.all([
+    //         fetch('/workplace_accounts/' + this.props.match.params.id),
+    //         fetch('/managers')
+    //     ])
+    //     .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+    //     .then(([data1, data2]) => this.setState({
+    //         workplace_account: data1, 
+    //         managers: data2
+    //     }));
+    // }
 }
 
-export default WorkplaceAccountContainer;
+const mapStateToProps = (state, ownProps) => {
+    const account = state.workplaceAccounts.filter(acct =>
+        acct.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+    return {
+      workplaceAccount: account,
+      managers: state.managers
+    };
+  };
+
+
+export default connect(mapStateToProps)(WorkplaceAccountContainer);

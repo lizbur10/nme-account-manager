@@ -137,38 +137,38 @@ const initialState =
         }
         },
         {
-        id: 7,
-        active: false,
-        manager_id: 1,
-        company_name: "Fake Co",
-        company_address: "1 Fake Way",
-        company_city: "Cambridge",
-        company_zip_code: null,
-        ctct_email_list: "Fake Co",
-        scheduling_contact_name: "Joe",
-        scheduling_contact_phone: null,
-        scheduling_contact_email: "Joe@fakeco.com",
-        hr_contact_name: null,
-        hr_contact_phone: null,
-        hr_contact_email: null,
-        delivery_day: "tuesday",
-        delivery_time: "3:00-3:15",
-        special_instructions: null,
-        manager: {
-        id: 1,
-        active: true,
-        market: {
-        id: 1,
-        name: "Albany",
-        created_at: "2018-09-30T14:29:47.131Z",
-        updated_at: "2018-09-30T14:29:47.131Z"
-        },
-        name: "Tyler",
-        email: "tyler@9mileseast.com",
-        phone: null,
-        username: "tyler",
-        password: "password"
-        }
+            id: 7,
+            active: false,
+            manager_id: 1,
+            company_name: "Happy-Go-Lucky toy factory",
+            company_address: "1 Happy-Go-Lucky Lane",
+            company_city: "Quahog",
+            company_zip_code: null,
+            ctct_email_list: "Happy-Go-Lucky",
+            scheduling_contact_name: "Peter",
+            scheduling_contact_phone: null,
+            scheduling_contact_email: "Peter@happygolucky.com",
+            hr_contact_name: null,
+            hr_contact_phone: null,
+            hr_contact_email: null,
+            delivery_day: "tuesday",
+            delivery_time: "3:00-3:15",
+            special_instructions: null,
+            manager: {
+            id: 1,
+            active: true,
+            market: {
+            id: 1,
+            name: "Albany",
+            created_at: "2018-09-30T14:29:47.131Z",
+            updated_at: "2018-09-30T14:29:47.131Z"
+            },
+            name: "Tyler",
+            email: "tyler@9mileseast.com",
+            phone: null,
+            username: "tyler",
+            password: "password"
+            }
         },
         {
         id: 5,
@@ -282,9 +282,10 @@ const reducer = (state = initialState, action) => {
                 state.map(account => 
                     (account.id === action.id ? Object.assign({}, account, { active }) : account))
 
-            )
+            );
+        default: 
+            return state;
     }
-    return state;
 }
 
 export default reducer;
