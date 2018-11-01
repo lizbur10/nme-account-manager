@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
 
 class ManagerContainer extends Component {
-    state = {
-        manager: [],
-        markets: []
-    }
+    // state = {
+    //     manager: [],
+    //     markets: []
+    // }
 
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
@@ -50,7 +51,7 @@ class ManagerContainer extends Component {
             <React.Fragment>
                 <h2>Account Manager Details</h2>
                 <Manager 
-                    managerInfo={this.state.manager} 
+                    managerInfo={this.props.manager} 
                     handleChange={this.handleChange}
                     handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
@@ -58,17 +59,26 @@ class ManagerContainer extends Component {
         );
     }
 
-    componentDidMount() {
-        Promise.all([
-            fetch('/managers/' + this.props.match.params.id),
-            fetch('/markets')
-        ])
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(([data1, data2]) => this.setState({
-            manager: data1, 
-            markets: data2
-        }));
-    }
+//     componentDidMount() {
+//         Promise.all([
+//             fetch('/managers/' + this.props.match.params.id),
+//             fetch('/markets')
+//         ])
+//         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+//         .then(([data1, data2]) => this.setState({
+//             manager: data1, 
+//             markets: data2
+//         }));
+//     }
 }
 
-export default ManagerContainer;
+const mapStateToProps = (state, ownProps) => {
+    const manager = state.managers.filter(m =>
+        m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+    return {
+      manager: manager
+    };
+};
+
+
+export default connect(mapStateToProps)(ManagerContainer);

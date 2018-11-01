@@ -80,7 +80,7 @@ const mapStateToProps = (state, ownProps) => {
       workplaceAccount: account,
       managers: state.managers
     };
-  };
+};
 
 
 export default connect(mapStateToProps)(WorkplaceAccountContainer);
