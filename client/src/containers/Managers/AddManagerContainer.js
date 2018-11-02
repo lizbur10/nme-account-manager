@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
 
 class AddManagerContainer extends Component {
     state = {
-        manager: [],
-        markets: [] 
+        manager: []
     }
 
     // NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
@@ -23,7 +23,7 @@ class AddManagerContainer extends Component {
 
     // REDUX
     handleReassignMarket = (event) => {
-        const newMarket = this.state.markets.filter(market =>
+        const newMarket = this.props.markets.filter(market =>
             market.name.toLowerCase() === event.target.value)[0];
         this.setState({
             manager: {
@@ -48,15 +48,15 @@ class AddManagerContainer extends Component {
         )
     }
 
-    componentDidMount() {
-        fetch('/markets') 
-        .then(response => response.json())
-        .then(data => {
-          this.setState({
-              markets: data
-          })
-        })
-      }
+    // componentDidMount() {
+    //     fetch('/markets') 
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       this.setState({
+    //           markets: data
+    //       })
+    //     })
+    //   }
   
 
     render () {
@@ -75,4 +75,10 @@ class AddManagerContainer extends Component {
 
 }
 
-export default AddManagerContainer;
+const mapStateToProps = state => {
+    return {
+      markets: state.markets
+    };
+  };
+
+export default connect(mapStateToProps)(AddManagerContainer);
