@@ -7,10 +7,9 @@ import Manager from '../../components/Manager/fullInfo';
 
 
 class ManagerContainer extends Component {
-    // state = {
-    //     manager: [],
-    //     markets: []
-    // }
+    state = {
+        manager: this.props.manager
+    }
 
     // NO REDUX
     handleChange = event => {
@@ -23,9 +22,9 @@ class ManagerContainer extends Component {
         })
     }
 
-    // REDUX
+    // NO REDUX
     handleReassignMarket = (event) => {
-        const newMarket = this.state.markets.filter(market =>
+        const newMarket = this.props.markets.filter(market =>
             market.name.toLowerCase() === event.target.value)[0];
         this.setState({
             manager: {
@@ -36,7 +35,7 @@ class ManagerContainer extends Component {
         })
     }
 
-    // ASYNC
+    // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
         fetch('/managers/' + this.props.match.params.id, { 
@@ -58,7 +57,7 @@ class ManagerContainer extends Component {
             <React.Fragment>
                 <h2>Account Manager Details</h2>
                 <Manager 
-                    managerInfo={this.props.manager} 
+                    managerInfo={this.state.manager} 
                     handleChange={this.handleChange}
                     handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
@@ -83,9 +82,11 @@ const mapStateToProps = (state, ownProps) => {
     const manager = state.managers.filter(m =>
         m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
-      manager: manager
+        manager: manager,
+        markets: state.markets
     };
 };
+
 
 
 export default connect(mapStateToProps)(ManagerContainer);

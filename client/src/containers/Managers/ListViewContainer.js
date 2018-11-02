@@ -13,6 +13,7 @@ class ManagerListContainer extends React.Component {
     //   };
     // }
 
+    // -> REDUX -- DONE
     // toggleSwitch = (id, active) => {
     //   this.setState({
     //     managers: this.props.managers.map(manager => 
@@ -22,7 +23,7 @@ class ManagerListContainer extends React.Component {
     //   })
     // }
 
-    // ASYNC
+    // -> ASYNC
     persistUpdate = (id) => {
       let managerIndex = this.props.managers.findIndex(function(manager) {
         return manager.id === id;
@@ -36,10 +37,9 @@ class ManagerListContainer extends React.Component {
       })
     }
 
-    // REDUX FOR GETTING MARKETS ONLY
+    // -> REDUX FOR GETTING MARKETS ONLY -- DONE
     separateMarkets = () => {
       const marketsArray = this.props.markets;
-      console.log(marketsArray);
       const marketArray = [];
       for (let i=0; i < marketsArray.length; i++) {
         marketArray[i] = this.props.managers.filter(function (manager) {
@@ -49,7 +49,7 @@ class ManagerListContainer extends React.Component {
       return marketArray;
     }
 
-    // NO REDUX
+    // NO REDUX - PAGE DISPLAY ONLY
     returnMarket = (marketArray) => {
       if ( marketArray[0] ) {
         return marketArray[0].market.name.charAt(0).toUpperCase() + marketArray[0].market.name.slice(1)
