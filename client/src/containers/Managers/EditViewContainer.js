@@ -12,6 +12,7 @@ class ManagerContainer extends Component {
     //     markets: []
     // }
 
+    // NO REDUX
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
@@ -22,6 +23,7 @@ class ManagerContainer extends Component {
         })
     }
 
+    // REDUX
     handleReassignMarket = (event) => {
         const newMarket = this.state.markets.filter(market =>
             market.name.toLowerCase() === event.target.value)[0];
@@ -34,6 +36,7 @@ class ManagerContainer extends Component {
         })
     }
 
+    // ASYNC
     handleSubmit = event => {
         event.preventDefault();
         fetch('/managers/' + this.props.match.params.id, { 

@@ -7,6 +7,7 @@ class AddWorkplaceAccountContainer extends Component {
         workplace_account: []
     }
 
+    // NO REDUX
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
@@ -17,6 +18,7 @@ class AddWorkplaceAccountContainer extends Component {
         })
     }
 
+    // REDUX
     handleReassignManager = (event) => {
         const newManager = this.props.managers.filter(manager =>
             manager.name.toLowerCase() === event.target.value)[0];
@@ -29,6 +31,7 @@ class AddWorkplaceAccountContainer extends Component {
         })
     }
 
+    // ASYNC
     handleSubmit = event => {
         event.preventDefault();
         fetch('/workplace_accounts', { 

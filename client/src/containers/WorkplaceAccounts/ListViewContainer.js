@@ -22,6 +22,7 @@ class WorkplaceAccountListContainer extends React.Component {
     //   })
     // }
 
+    // ASYNC
     persistUpdate = (id) => {
       let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
         return account.id === id;
@@ -35,6 +36,7 @@ class WorkplaceAccountListContainer extends React.Component {
       })
     }
 
+    // NO REDUX
     separateDays = () => {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
@@ -46,6 +48,7 @@ class WorkplaceAccountListContainer extends React.Component {
       return dayArray;
     }
 
+    // NO REDUX
     returnDay = (dayArray) => {
       if ( dayArray[0] ) {
         return dayArray[0]["delivery_day"].charAt(0).toUpperCase() + dayArray[0]["delivery_day"].slice(1)

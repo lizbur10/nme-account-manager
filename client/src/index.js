@@ -9,10 +9,12 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import workplaceAccountReducer from './reducers/workplaceAccountReducer';
 import managerReducer from './reducers/managerReducer';
+import marketReducer from './reducers/marketReducer';
 
 const rootReducer = combineReducers({
     workplaceAccounts: workplaceAccountReducer,
-    managers: managerReducer
+    managers: managerReducer,
+    markets: marketReducer
   });
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

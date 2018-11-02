@@ -22,6 +22,7 @@ class ManagerListContainer extends React.Component {
     //   })
     // }
 
+    // ASYNC
     persistUpdate = (id) => {
       let managerIndex = this.props.managers.findIndex(function(manager) {
         return manager.id === id;
@@ -35,17 +36,20 @@ class ManagerListContainer extends React.Component {
       })
     }
 
+    // REDUX FOR GETTING MARKETS ONLY
     separateMarkets = () => {
-      const marketsArray = ['albany', 'boston'];
+      const marketsArray = this.props.markets;
+      console.log(marketsArray);
       const marketArray = [];
       for (let i=0; i < marketsArray.length; i++) {
         marketArray[i] = this.props.managers.filter(function (manager) {
-          return manager.market.name.toLowerCase() === marketsArray[i];
+          return manager.market.name.toLowerCase() === marketsArray[i].name.toLowerCase();
         })
       }
       return marketArray;
     }
 
+    // NO REDUX
     returnMarket = (marketArray) => {
       if ( marketArray[0] ) {
         return marketArray[0].market.name.charAt(0).toUpperCase() + marketArray[0].market.name.slice(1)
@@ -84,7 +88,8 @@ class ManagerListContainer extends React.Component {
 
   const mapStateToProps = state => {
     return {
-      managers: state.managers
+      managers: state.managers,
+      markets: state.markets
     };
   };
 

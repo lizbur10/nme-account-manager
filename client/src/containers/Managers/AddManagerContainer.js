@@ -7,6 +7,10 @@ class AddManagerContainer extends Component {
         markets: [] 
     }
 
+    // NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
+    // TO REDUX 
+
+    // NO REDUX
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
@@ -17,6 +21,7 @@ class AddManagerContainer extends Component {
         })
     }
 
+    // REDUX
     handleReassignMarket = (event) => {
         const newMarket = this.state.markets.filter(market =>
             market.name.toLowerCase() === event.target.value)[0];
@@ -29,6 +34,7 @@ class AddManagerContainer extends Component {
         })
     }
 
+    // ASYNC
     handleSubmit = event => {
         event.preventDefault();
         fetch('/managers', { 
