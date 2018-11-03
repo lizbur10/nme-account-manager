@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
 
-// NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
-// TO REDUX 
-
 
 class ManagerContainer extends Component {
     state = {
@@ -22,14 +19,14 @@ class ManagerContainer extends Component {
         })
     }
 
-    // NO REDUX
+    // -> REDUX
     handleReassignMarket = (event) => {
         const newMarket = this.props.markets.filter(market =>
             market.name.toLowerCase() === event.target.value)[0];
         this.setState({
             manager: {
                 ...this.state.manager,
-                market_id: newMarket.id,
+                // market_id: newMarket.id,
                 market: newMarket
             }
         })

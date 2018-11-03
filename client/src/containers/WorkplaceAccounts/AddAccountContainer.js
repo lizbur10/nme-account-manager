@@ -18,7 +18,7 @@ class AddWorkplaceAccountContainer extends Component {
         })
     }
 
-    // REDUX
+    // -> REDUX
     handleReassignManager = (event) => {
         const newManager = this.props.managers.filter(manager =>
             manager.name.toLowerCase() === event.target.value)[0];
@@ -31,7 +31,7 @@ class AddWorkplaceAccountContainer extends Component {
         })
     }
 
-    // ASYNC
+    // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
         fetch('/workplace_accounts', { 

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class WorkplaceAccountContainer extends Component {
-    // state = {
-    //     workplace_account: [],
-    //     managers: []
-    // }
+    state = {
+        workplace_account: this.props.workplaceAccount
+    }
 
-    // NO REDUX (?)
+    // NO REDUX
     handleChange = event => {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
@@ -21,12 +20,12 @@ class WorkplaceAccountContainer extends Component {
 
     // REDUX
     handleReassignManager = (event) => {
-        const newManager = this.state.managers.filter(manager =>
+        const newManager = this.props.managers.filter(manager =>
             manager.name.toLowerCase() === event.target.value)[0];
         this.setState({
             workplace_account: {
                 ...this.state.workplace_account,
-                manager_id: newManager.id,
+                // manager_id: newManager.id,
                 manager: newManager
             }
         })
@@ -54,7 +53,7 @@ class WorkplaceAccountContainer extends Component {
             <React.Fragment>
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
-                    companyInfo={this.props.workplaceAccount} 
+                    companyInfo={this.state.workplace_account} 
                     managers={this.props.managers}
                     handleChange={this.handleChange}
                     handleReassignManager={this.handleReassignManager} 
