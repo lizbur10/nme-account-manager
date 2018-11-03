@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types'; 
 
-class WorkplaceAccount extends Component { //used class instead of const to enable prop-type validation
+class WorkplaceAccount extends Component { 
     render () {
 
         const labelMaker = (varName) => {
-            // return varName.split(/(?=[A-Z])/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
             return varName.replace(/_/g, " ").replace("ctct", "CTCT").replace(/hr/, "HR").split(/\s/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
         }
 
@@ -53,7 +52,7 @@ class WorkplaceAccount extends Component { //used class instead of const to enab
             this.props.companyInfo["manager"] ? value=this.props.companyInfo["manager"]["name"].toLowerCase() : value = "select_manager";
             return(
                 <p>Account Manager: 
-                    <select onChange={this.props.handleReassignManager} 
+                    <select onChange={this.props.handleChange} 
                         name="manager" 
                         value={value} >
                             <option value="select_manager">Select Manager</option>

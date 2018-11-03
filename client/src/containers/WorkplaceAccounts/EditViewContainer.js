@@ -9,27 +9,38 @@ class WorkplaceAccountContainer extends Component {
 
     // NO REDUX
     handleChange = event => {
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        let value;
+        if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MANAGER
+            value = this.props.managers.filter(manager =>
+                manager.name.toLowerCase() === event.target.value)[0];
+            
+        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
+        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
             workplace_account: {
                 ...this.state.workplace_account,
                 [event.target.name]: value
             }
         })
+
     }
 
     // REDUX
-    handleReassignManager = (event) => {
-        const newManager = this.props.managers.filter(manager =>
-            manager.name.toLowerCase() === event.target.value)[0];
-        this.setState({
-            workplace_account: {
-                ...this.state.workplace_account,
-                // manager_id: newManager.id,
-                manager: newManager
-            }
-        })
-    }
+    // handleReassignManager = (event) => {
+    //     const newManager = this.props.managers.filter(manager =>
+    //         manager.name.toLowerCase() === event.target.value)[0];
+    //     this.setState({
+    //         workplace_account: {
+    //             ...this.state.workplace_account,
+    //             // manager_id: newManager.id,
+    //             manager: newManager
+    //         }
+    //     })
+    // }
 
     // ASYNC
     handleSubmit = event => {
@@ -56,7 +67,7 @@ class WorkplaceAccountContainer extends Component {
                     companyInfo={this.state.workplace_account} 
                     managers={this.props.managers}
                     handleChange={this.handleChange}
-                    handleReassignManager={this.handleReassignManager} 
+                    // handleReassignManager={this.props.onReassignManager} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );

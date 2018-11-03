@@ -275,9 +275,9 @@ const initialState =
     ]
 
 const reducer = (state = initialState, action) => {
-    const active = action.active;
     switch (action.type) {
         case 'TOGGLE_ACTIVE':
+            const active = action.active;
             return (
                 state.map(account => 
                     (account.id === action.id ? Object.assign({}, account, { active }) : account))
