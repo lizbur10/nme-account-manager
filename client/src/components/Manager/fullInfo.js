@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types'; 
 
-// NOTE: MARKET IS BROKEN RIGHT NOW - NEED TO SWITCH FROM COMPONENTDIDMOUNT FETCH ACTION 
-// TO REDUX IN EDITVIEWCONTAINER
-
 class Manager extends Component { //used class instead of const to enable prop-type validation
     render () {
 
         const labelMaker = (varName) => {
             return varName
                 .replace(/_/g, " ")
-                // .replace("ctct", "CTCT")
-                // .replace(/hr/, "HR")
                 .split(/\s/)
-                .map((word) => 
-                    word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+                .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+                .join(' ');
         }
 
         const handleBlank = (fieldName) => {
@@ -52,7 +47,7 @@ class Manager extends Component { //used class instead of const to enable prop-t
             this.props.managerInfo["market"] ? value=this.props.managerInfo["market"]["name"].toLowerCase() : value = "select_market";
             return (
                 <p>Market:
-                    <select onChange={this.props.handleReassignMarket} 
+                    <select onChange={this.props.handleChange} 
                         name="market" 
                         value={value} >
                             <option value="select_market">Select Market</option>

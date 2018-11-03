@@ -10,7 +10,17 @@ class ManagerContainer extends Component {
 
     // NO REDUX
     handleChange = event => {
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        let value;
+        if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MARKET
+            value = this.props.markets.filter(market =>
+                market.name.toLowerCase() === event.target.value)[0];
+            
+        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
+        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
             manager: {
                 ...this.state.manager,
@@ -20,17 +30,17 @@ class ManagerContainer extends Component {
     }
 
     // -> REDUX
-    handleReassignMarket = (event) => {
-        const newMarket = this.props.markets.filter(market =>
-            market.name.toLowerCase() === event.target.value)[0];
-        this.setState({
-            manager: {
-                ...this.state.manager,
-                // market_id: newMarket.id,
-                market: newMarket
-            }
-        })
-    }
+    // handleReassignMarket = (event) => {
+    //     const newMarket = this.props.markets.filter(market =>
+    //         market.name.toLowerCase() === event.target.value)[0];
+    //     this.setState({
+    //         manager: {
+    //             ...this.state.manager,
+    //             // market_id: newMarket.id,
+    //             market: newMarket
+    //         }
+    //     })
+    // }
 
     // -> ASYNC
     handleSubmit = event => {
@@ -56,7 +66,7 @@ class ManagerContainer extends Component {
                 <Manager 
                     managerInfo={this.state.manager} 
                     handleChange={this.handleChange}
-                    handleReassignMarket={this.handleReassignMarket}
+                    // handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );

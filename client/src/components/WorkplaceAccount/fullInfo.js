@@ -5,7 +5,13 @@ class WorkplaceAccount extends Component {
     render () {
 
         const labelMaker = (varName) => {
-            return varName.replace(/_/g, " ").replace("ctct", "CTCT").replace(/hr/, "HR").split(/\s/).map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+            return varName
+                .replace(/_/g, " ")
+                .replace("ctct", "CTCT")
+                .replace(/hr/, "HR")
+                .split(/\s/)
+                .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+                .join(' ');
         }
 
         const handleBlank = (fieldName) => {
