@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ManagerList from '../../components/Manager/listView';
+import * as managerActions from '../../actions/index';
 
 class ManagerListContainer extends React.Component {
     // constructor() {
@@ -95,7 +96,7 @@ class ManagerListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch({type: "TOGGLE_ACTIVE", id: id, active: active })
+        onToggleSwitch: (id, active) => dispatch(managerActions.toggleSwitch(id, active))
     };
   };
 

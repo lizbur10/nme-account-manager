@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import WorkplaceAccountList from '../../components/WorkplaceAccount/listView';
+import * as workplaceAccountActions from '../../actions/index';
 
 class WorkplaceAccountListContainer extends React.Component {
     // constructor() {
@@ -93,7 +94,7 @@ class WorkplaceAccountListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch({type: "TOGGLE_ACTIVE", id: id, active: active })
+        onToggleSwitch: (id, active) => dispatch( workplaceAccountActions.toggleSwitch(id, active) )
     };
   };
 
