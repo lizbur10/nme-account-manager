@@ -19,7 +19,6 @@ class WorkplaceAccountContainer extends Component {
         } else {
             value = event.target.value;
         }
-        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
             workplace_account: {
                 ...this.state.workplace_account,
@@ -28,19 +27,6 @@ class WorkplaceAccountContainer extends Component {
         })
 
     }
-
-    // REDUX
-    // handleReassignManager = (event) => {
-    //     const newManager = this.props.managers.filter(manager =>
-    //         manager.name.toLowerCase() === event.target.value)[0];
-    //     this.setState({
-    //         workplace_account: {
-    //             ...this.state.workplace_account,
-    //             // manager_id: newManager.id,
-    //             manager: newManager
-    //         }
-    //     })
-    // }
 
     // ASYNC
     handleSubmit = event => {
@@ -67,7 +53,6 @@ class WorkplaceAccountContainer extends Component {
                     companyInfo={this.state.workplace_account} 
                     managers={this.props.managers}
                     handleChange={this.handleChange}
-                    // handleReassignManager={this.props.onReassignManager} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );

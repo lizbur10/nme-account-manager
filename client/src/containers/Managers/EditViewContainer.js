@@ -20,7 +20,6 @@ class ManagerContainer extends Component {
         } else {
             value = event.target.value;
         }
-        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         this.setState({
             manager: {
                 ...this.state.manager,
@@ -28,19 +27,6 @@ class ManagerContainer extends Component {
             }
         })
     }
-
-    // -> REDUX
-    // handleReassignMarket = (event) => {
-    //     const newMarket = this.props.markets.filter(market =>
-    //         market.name.toLowerCase() === event.target.value)[0];
-    //     this.setState({
-    //         manager: {
-    //             ...this.state.manager,
-    //             // market_id: newMarket.id,
-    //             market: newMarket
-    //         }
-    //     })
-    // }
 
     // -> ASYNC
     handleSubmit = event => {
@@ -66,7 +52,6 @@ class ManagerContainer extends Component {
                 <Manager 
                     managerInfo={this.state.manager} 
                     handleChange={this.handleChange}
-                    // handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
