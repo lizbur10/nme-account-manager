@@ -5,3 +5,11 @@ export const toggleSwitch = (id, active) => {
         active: active
     };
 } 
+
+export {
+    //NAMES OF ACTION CREATORS
+} from './workplaceAccountActions';
+
+export {
+    //NAMES OF ACTION CREATORS
+} from './managerActions';
