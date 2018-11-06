@@ -13,9 +13,9 @@ import managerReducer from './reducers/managerReducer';
 import marketReducer from './reducers/marketReducer';
 
 const rootReducer = combineReducers({
-    workplaceAccounts: workplaceAccountReducer,
-    managers: managerReducer,
-    markets: marketReducer
+    workplaceAccount: workplaceAccountReducer,
+    manager: managerReducer,
+    market: marketReducer
   });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

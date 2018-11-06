@@ -7,7 +7,7 @@ export const toggleSwitch = (id, active) => {
 } 
 
 export {
-    //NAMES OF ACTION CREATORS
+    fetchWorkplaceAccounts
 } from './workplaceAccountActions';
 
 export {
