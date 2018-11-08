@@ -5,7 +5,7 @@ import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class WorkplaceAccountContainer extends Component {
     state = {
-        workplace_account: this.props.workplaceAccount
+        workplaceAccount: this.props.workplaceAccount
     }
 
     // NO REDUX
@@ -21,8 +21,8 @@ class WorkplaceAccountContainer extends Component {
             value = event.target.value;
         }
         this.setState({
-            workplace_account: {
-                ...this.state.workplace_account,
+            workplaceAccount: {
+                ...this.state.workplaceAccount,
                 [event.target.name]: value
             }
         })
@@ -47,12 +47,11 @@ class WorkplaceAccountContainer extends Component {
     }
 
     render () {
-        console.log(this.props);
         return (
             <React.Fragment>
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
-                    companyInfo={this.props.workplaceAccount} 
+                    companyInfo={this.state.workplaceAccount} 
                     managers={this.props.managers}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit} /> 
