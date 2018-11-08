@@ -11,21 +11,33 @@ class WorkplaceAccountContainer extends Component {
     // NO REDUX
     handleChange = event => {
         let value;
-        console.log(event.target);
+        let newManager = null;
         if ( event.target.type === 'select-one' && event.target.name === 'manager') { // HANDLES DROP-DOWN TO SELECT MANAGER
             value = this.props.managers.filter(manager =>
                 manager.name.toLowerCase() === event.target.value)[0];
+            newManager = value.id;
         } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
             value = event.target.checked;
         } else {
             value = event.target.value;
         }
-        this.setState({
-            workplaceAccount: {
-                ...this.state.workplaceAccount,
-                [event.target.name]: value
-            }
-        })
+        if (newManager) {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    manager_id: newManager,
+                    [event.target.name]: value
+                }
+            })
+        } else {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    [event.target.name]: value
+                }
+            })
+    
+        }
 
     }
 
