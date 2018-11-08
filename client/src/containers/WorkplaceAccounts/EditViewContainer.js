@@ -11,10 +11,10 @@ class WorkplaceAccountContainer extends Component {
     // NO REDUX
     handleChange = event => {
         let value;
-        if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MANAGER
+        console.log(event.target);
+        if ( event.target.type === 'select-one' && event.target.name === 'manager') { // HANDLES DROP-DOWN TO SELECT MANAGER
             value = this.props.managers.filter(manager =>
                 manager.name.toLowerCase() === event.target.value)[0];
-            
         } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
             value = event.target.checked;
         } else {
@@ -37,7 +37,7 @@ class WorkplaceAccountContainer extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state.workplace_account)
+            body: JSON.stringify(this.state.workplaceAccount)
         }).then(response => {
             this.props.history.push('/workplace_accounts');
             console.log(response);
