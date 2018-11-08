@@ -15,3 +15,11 @@ export const fetchWorkplaceAccounts = () => {
 
     };
 }
+
+export const workplaceAccountsToggleSwitch = (id, active) => {
+    return {
+        type: 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE',
+        id: id,
+        active: active
+    };
+} 

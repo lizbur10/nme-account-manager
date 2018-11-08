@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 workplaceAccounts: action.workplaceAccounts
             }
-        case 'TOGGLE_ACTIVE':
+        case 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE':
             const active = action.active;
             const updatedWorkplaces = state.workplaceAccounts.map(account => 
                 (account.id === action.id ? Object.assign({}, account, { active }) : account))

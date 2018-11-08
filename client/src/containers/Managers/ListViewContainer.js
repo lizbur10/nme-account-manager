@@ -100,7 +100,7 @@ class ManagerListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch(managerActions.toggleSwitch(id, active)),
+        onToggleSwitch: (id, active) => dispatch(managerActions.managersToggleSwitch(id, active)),
         onFetchManagers: () => dispatch( managerActions.fetchManagers())
     };
   };

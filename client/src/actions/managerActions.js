@@ -16,3 +16,11 @@ export const fetchManagers = () => {
 
     };
 }  
+
+export const managersToggleSwitch = (id, active) => {
+    return {
+        type: 'MANAGER_TOGGLE_ACTIVE',
+        id: id,
+        active: active
+    };
+} 

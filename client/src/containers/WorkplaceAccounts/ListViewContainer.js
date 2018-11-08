@@ -97,7 +97,7 @@ class WorkplaceAccountListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch( workplaceAccountActions.toggleSwitch(id, active) ),
+        onToggleSwitch: (id, active) => dispatch( workplaceAccountActions.workplaceAccountsToggleSwitch(id, active) ),
         onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts())
     };
   };
