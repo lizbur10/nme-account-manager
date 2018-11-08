@@ -62,6 +62,7 @@ class WorkplaceAccountListContainer extends React.Component {
 
     componentDidMount() {
       this.props.onFetchWorkplaceAccounts();
+      this.props.onFetchManagers();
       //   fetch('/workplace_accounts') 
     //   .then(response => response.json())
     //   .then(data => {
@@ -91,14 +92,16 @@ class WorkplaceAccountListContainer extends React.Component {
 
   const mapStateToProps = state => {
     return {
-      workplaceAccounts: state.workplaceAccount.workplaceAccounts
+      workplaceAccounts: state.workplaceAccount.workplaceAccounts,
+      managers: state.manager.managers
     };
   };
 
   const mapDispatchToProps = dispatch => {
     return {
         onToggleSwitch: (id, active) => dispatch( workplaceAccountActions.workplaceAccountsToggleSwitch(id, active) ),
-        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts())
+        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
+        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
     };
   };
 

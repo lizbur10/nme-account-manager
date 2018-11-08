@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
+
 class WorkplaceAccountContainer extends Component {
     state = {
         workplace_account: this.props.workplaceAccount
@@ -46,11 +47,12 @@ class WorkplaceAccountContainer extends Component {
     }
 
     render () {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
-                    companyInfo={this.state.workplace_account} 
+                    companyInfo={this.props.workplaceAccount} 
                     managers={this.props.managers}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit} /> 
@@ -68,7 +70,7 @@ class WorkplaceAccountContainer extends Component {
     //         workplace_account: data1, 
     //         managers: data2
     //     }));
-    // }
+    //     }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -76,9 +78,8 @@ const mapStateToProps = (state, ownProps) => {
         acct.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
       workplaceAccount: account,
-      managers: state.manager
+      managers: state.manager.managers
     };
 };
-
 
 export default connect(mapStateToProps)(WorkplaceAccountContainer);

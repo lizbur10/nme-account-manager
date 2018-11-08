@@ -46,10 +46,13 @@ class WorkplaceAccount extends Component {
 
         const createManagerList = () => {
             let options=[];
-            this.props.managers.map( manager =>
-              options.push(<option key={manager.id} value={manager.name.toLowerCase()}>{manager.name.charAt(0).toUpperCase() + manager.name.slice(1)}</option>)
-            )
-            return options;
+            if (this.props.managers) {
+                this.props.managers.map( manager =>
+                    options.push(<option key={manager.id} value={manager.name.toLowerCase()}>{manager.name.charAt(0).toUpperCase() + manager.name.slice(1)}</option>)
+                  )
+                  return options;
+      
+            }
     
         }
 

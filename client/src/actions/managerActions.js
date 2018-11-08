@@ -1,5 +1,4 @@
 export const getManagers = (managers) => {
-    console.log(managers);
     return {
         type: 'GET_MANAGERS',
         managers: managers
