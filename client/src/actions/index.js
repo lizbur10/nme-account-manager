@@ -11,5 +11,5 @@ export {
 } from './workplaceAccountActions';
 
 export {
-    //NAMES OF ACTION CREATORS
+    fetchManagers
 } from './managerActions';

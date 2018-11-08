@@ -42,10 +42,13 @@ class ManagerListContainer extends React.Component {
     separateMarkets = () => {
       const marketsArray = this.props.markets;
       const marketArray = [];
-      for (let i=0; i < marketsArray.length; i++) {
-        marketArray[i] = this.props.managers.filter(function (manager) {
-          return manager.market.name.toLowerCase() === marketsArray[i].name.toLowerCase();
-        })
+      if (this.props.managers) {
+        for (let i=0; i < marketsArray.length; i++) {
+          marketArray[i] = this.props.managers.filter(function (manager) {
+            return manager.market.name.toLowerCase() === marketsArray[i].name.toLowerCase();
+          })
+        }
+  
       }
       return marketArray;
     }
@@ -59,7 +62,8 @@ class ManagerListContainer extends React.Component {
       }
     } 
 
-    // componentDidMount() {
+    componentDidMount() {
+      this.props.onFetchManagers();
     //   fetch('/managers') 
     //   .then(response => response.json())
     //   .then(data => {
@@ -67,7 +71,7 @@ class ManagerListContainer extends React.Component {
     //         managers: data
     //     })
     //   })
-    // }
+    }
 
     render() {
       return (
@@ -89,14 +93,15 @@ class ManagerListContainer extends React.Component {
 
   const mapStateToProps = state => {
     return {
-      managers: state.managers,
-      markets: state.markets
+      managers: state.manager.managers,
+      markets: state.market
     };
   };
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch(managerActions.toggleSwitch(id, active))
+        onToggleSwitch: (id, active) => dispatch(managerActions.toggleSwitch(id, active)),
+        onFetchManagers: () => dispatch( managerActions.fetchManagers())
     };
   };
 

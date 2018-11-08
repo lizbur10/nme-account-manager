@@ -72,11 +72,11 @@ class WorkplaceAccountContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const account = state.workplaceAccounts.filter(acct =>
+    const account = state.workplaceAccount.workplaceAccounts.filter(acct =>
         acct.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
       workplaceAccount: account,
-      managers: state.managers
+      managers: state.manager
     };
 };
 
