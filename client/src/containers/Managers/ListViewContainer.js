@@ -64,6 +64,7 @@ class ManagerListContainer extends React.Component {
 
     componentDidMount() {
       this.props.onFetchManagers();
+      this.props.onFetchMarkets();
     //   fetch('/managers') 
     //   .then(response => response.json())
     //   .then(data => {
@@ -94,14 +95,15 @@ class ManagerListContainer extends React.Component {
   const mapStateToProps = state => {
     return {
       managers: state.manager.managers,
-      markets: state.market
+      markets: state.market.markets
     };
   };
 
   const mapDispatchToProps = dispatch => {
     return {
         onToggleSwitch: (id, active) => dispatch(managerActions.managersToggleSwitch(id, active)),
-        onFetchManagers: () => dispatch( managerActions.fetchManagers())
+        onFetchManagers: () => dispatch( managerActions.fetchManagers()),
+        onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
     };
   };
 

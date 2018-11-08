@@ -51,6 +51,7 @@ class ManagerContainer extends Component {
                 <h2>Account Manager Details</h2>
                 <Manager 
                     managerInfo={this.state.manager} 
+                    markets={this.props.markets}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
@@ -71,11 +72,11 @@ class ManagerContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const manager = state.managers.filter(m =>
+    const manager = state.manager.managers.filter(m =>
         m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
         manager: manager,
-        markets: state.markets
+        markets: state.market.markets
     };
 };
 

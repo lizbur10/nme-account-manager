@@ -1,18 +1,17 @@
-const initialState = 
-    [
-        {
-            id: 1,
-            name: "Albany",
-        },
-        {
-            id: 2,
-            name: "Boston",
-        }
-    ]
+const initialState = {
+    markets: null
+}
 
-
-const reducer = (state = initialState) => {
-    return state;
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'GET_MARKETS':
+            return {
+                ...state,
+                markets: action.markets
+            };
+        default: 
+            return state;
+    }
 }
 
 export default reducer;

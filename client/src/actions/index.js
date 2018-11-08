@@ -7,3 +7,7 @@ export {
     fetchManagers,
     managersToggleSwitch
 } from './managerActions';
+
+export {
+    fetchMarkets
+} from './marketActions';
