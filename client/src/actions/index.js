@@ -1,6 +1,7 @@
 export {
     fetchWorkplaceAccounts,
-    workplaceAccountsToggleSwitch
+    workplaceAccountsToggleSwitch,
+    persistWorkplaceAccount
 } from './workplaceAccountActions';
 
 export {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
+import * as workplaceAccountActions from '../../actions/index';
 
 class AddWorkplaceAccountContainer extends Component {
     state = {
@@ -22,7 +23,7 @@ class AddWorkplaceAccountContainer extends Component {
         } else {
             value = event.target.value;
         }
-        if (newManager) {
+        if (newManager) { 
             this.setState({
                 workplaceAccount: {
                     ...this.state.workplaceAccount,
@@ -36,8 +37,7 @@ class AddWorkplaceAccountContainer extends Component {
                     ...this.state.workplaceAccount,
                     [event.target.name]: value
                 }
-            })
-    
+            })    
         }
     }
 
@@ -57,17 +57,18 @@ class AddWorkplaceAccountContainer extends Component {
     // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/workplace_accounts', { 
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.workplaceAccount)
-        }).then(response => {
-            this.props.history.push('/workplace_accounts');
-            console.log(response);
-        })
-          .catch(error => console.log(error))
+        this.props.onSubmitWorkplaceAccount("POST", this.state.workplaceAccount);
+        // fetch('/workplace_accounts', { 
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(this.state.workplaceAccount)
+        // }).then(response => {
+        //     this.props.history.push('/workplace_accounts');
+        //     console.log(response);
+        // })
+        //   .catch(error => console.log(error))
     }
 
     // componentDidMount() {
@@ -100,6 +101,12 @@ const mapStateToProps = state => {
     return {
       managers: state.manager.managers
     };
-  };
+};
 
-export default connect(mapStateToProps)(AddWorkplaceAccountContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitWorkplaceAccount: (methodType, accountInfo) => dispatch( workplaceAccountActions.persistWorkplaceAccount(methodType, accountInfo))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddWorkplaceAccountContainer);
