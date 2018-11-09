@@ -24,11 +24,36 @@ export const workplaceAccountsToggleSwitch = (id, active) => {
     };
 } 
 
-export const persistWorkplaceAccount = (methodType, accountInfo) => {
+export const persistNewWorkplaceAccount = (accountInfo) => {
+    return dispatch => {
+        dispatch(addWorkplaceAccount(accountInfo));
+        fetch('/workplace_accounts', { 
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(accountInfo)
+        }).then(response => {
+            // ADD SUCCESS MESSAGE AND REDIRECT 
+            console.log(response);
+        })
+          .catch(error => console.log(error))
+           
+    };
+}
+
+export const addWorkplaceAccount = (accountInfo) => {
+    return {
+        type: 'ADD_WORKPLACE_ACCOUNT',
+        accountInfo: accountInfo
+    }
+}
+
+export const persistUpdatedWorkplaceAccount = (accountInfo) => {
     return dispatch => {
         dispatch(updateWorkplaceAccount(accountInfo));
-        fetch('/workplace_accounts', { 
-            method: methodType,
+        fetch('/workplace_accounts/' + accountInfo.id, { 
+            method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             },
