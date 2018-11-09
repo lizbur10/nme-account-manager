@@ -24,7 +24,17 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     managers: updatedManagers // THIS SEEMS WRONG BUT IT'S WORKING
                 }
-    
+        case 'UPDATE_MANAGER':
+            return state.managers.map(manager => {
+                if (manager.id === action.managerInfo.id) {
+                    return {
+                        ...manager,
+                        ...action.managerInfo
+                    }
+                } 
+                return manager;
+            })
+        
         default: 
             return state;
     }

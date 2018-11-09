@@ -6,7 +6,8 @@ export {
 
 export {
     fetchManagers,
-    managersToggleSwitch
+    managersToggleSwitch,
+    persistManager
 } from './managerActions';
 
 export {

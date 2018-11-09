@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
+import * as managerActions from '../../actions/index';
+
 
 class AddManagerContainer extends Component {
     state = {
@@ -64,17 +66,19 @@ class AddManagerContainer extends Component {
     // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/managers', { 
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.manager)
-        }).then(response => {
-            this.props.history.push('/managers');
-            console.log(response);
-        })
-          .catch(error => console.log(error))
+        this.props.onSubmitManager("POST", this.state.manager);
+        // event.preventDefault();
+        // fetch('/managers', { 
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(this.state.manager)
+        // }).then(response => {
+        //     this.props.history.push('/managers');
+        //     console.log(response);
+        // })
+        //   .catch(error => console.log(error))
     }
 
     // componentDidMount() {
@@ -109,4 +113,10 @@ const mapStateToProps = state => {
     };
   };
 
-export default connect(mapStateToProps)(AddManagerContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitManager: (methodType, managerInfo) => dispatch( managerActions.persistManager(methodType, managerInfo))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddManagerContainer);
