@@ -10,31 +10,31 @@ const reducer = (state = initialState, action) => {
                 managers: action.managers
             };
         case 'MANAGER_TOGGLE_ACTIVE':
-            
-            // const active = action.active;
-            // return (
-            //     state.map(manager => 
-            //         (manager.id === action.id ? Object.assign({}, manager, { active }) : manager))
-
-            // );
             const active = action.active;
-            const updatedManagers = state.managers.map(account => 
-                (account.id === action.id ? Object.assign({}, account, { active }) : account))
-                return {
-                    ...state,
-                    managers: updatedManagers // THIS SEEMS WRONG BUT IT'S WORKING
-                }
+            const updatedActiveManagers = state.managers.map(manager => 
+                (manager.id === action.id ? Object.assign({}, manager, { active }) : manager))
+            return {
+                ...state,
+                managers: updatedActiveManagers
+            }
         case 'UPDATE_MANAGER':
-            return state.managers.map(manager => {
-                if (manager.id === action.managerInfo.id) {
-                    return {
-                        ...manager,
-                        ...action.managerInfo
-                    }
-                } 
-                return manager;
-            })
-        
+            console.log("manager info: ", action.managerInfo);
+            const updatedManagers = state.managers.map(manager => 
+                (manager.id === action.managerInfo.id ? Object.assign({}, action.managerInfo) : manager))
+            return {
+                ...state,
+                managers: updatedManagers
+            };
+        case 'ADD_MANAGER':
+            // TO BE FILLED IN
+            const newManager = action.managerInfo;
+            return {
+                ...state,
+                managers: {
+                    ...state.managers,
+                    newManager
+                }
+            };
         default: 
             return state;
     }

@@ -24,12 +24,36 @@ export const managersToggleSwitch = (id, active) => {
     };
 } 
 
-export const persistManager = (methodType, managerInfo) => {
-    console.log("manager info: ", managerInfo);
+export const persistNewManager = (managerInfo) => {
+    return dispatch => {
+        dispatch(addManager(managerInfo));
+        fetch('/managers', { 
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(managerInfo)
+        }).then(response => {
+            // ADD SUCCESS MESSAGE AND REDIRECT 
+            console.log(response);
+        })
+          .catch(error => console.log(error))
+           
+    };
+}
+
+export const addManager = (managerInfo) => {
+    return {
+        type: 'ADD_MANAGER',
+        managerInfo: managerInfo
+    }
+}
+
+export const persistUpdatedManager = (managerInfo) => {
     return dispatch => {
         dispatch(updateManager(managerInfo));
-        fetch('/managers', { 
-            method: methodType,
+        fetch('/managers/' + managerInfo.id, { 
+            method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             },

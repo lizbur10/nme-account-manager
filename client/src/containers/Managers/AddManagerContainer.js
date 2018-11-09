@@ -66,7 +66,7 @@ class AddManagerContainer extends Component {
     // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        this.props.onSubmitManager("POST", this.state.manager);
+        this.props.onSubmitManager(this.state.manager);
         // event.preventDefault();
         // fetch('/managers', { 
         //     method: "POST",
@@ -115,7 +115,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitManager: (methodType, managerInfo) => dispatch( managerActions.persistManager(methodType, managerInfo))
+        onSubmitManager: (managerInfo) => dispatch( managerActions.persistNewManager(managerInfo))
     }
 };
 

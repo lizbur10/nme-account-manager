@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Manager from '../../components/Manager/fullInfo';
+import * as managerActions from '../../actions/index';
 
 
 class ManagerContainer extends Component {
@@ -43,17 +44,20 @@ class ManagerContainer extends Component {
     // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/managers/' + this.props.match.params.id, { 
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.manager)
-        }).then(response => {
-            this.props.history.push('/managers');
-            console.log(response);
-          })
-          .catch(error => console.log(error))
+        this.props.onSubmitUpdatedManager(this.state.manager);
+
+        // event.preventDefault();
+        // fetch('/managers/' + this.props.match.params.id, { 
+        //     method: "PATCH",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(this.state.manager)
+        // }).then(response => {
+        //     this.props.history.push('/managers');
+        //     console.log(response);
+        //   })
+        //   .catch(error => console.log(error))
 
     }
 
@@ -70,7 +74,10 @@ class ManagerContainer extends Component {
         );
     }
 
-//     componentDidMount() {
+    componentDidMount() {
+        this.props.onFetchManagers();
+        this.props.onFetchMarkets();
+  
 //         Promise.all([
 //             fetch('/managers/' + this.props.match.params.id),
 //             fetch('/markets')
@@ -80,18 +87,25 @@ class ManagerContainer extends Component {
 //             manager: data1, 
 //             markets: data2
 //         }));
-//     }
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const manager = state.manager.managers.filter(m =>
-        m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+    const manager = state.manager.managers.filter(manager =>
+        manager.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
         manager: manager,
         markets: state.market.markets
     };
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitUpdatedManager: (managerInfo) => dispatch( managerActions.persistUpdatedManager(managerInfo)),
+        onFetchManagers: () => dispatch( managerActions.fetchManagers()),
+        onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
+    }
+};
 
 
-export default connect(mapStateToProps)(ManagerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ManagerContainer);

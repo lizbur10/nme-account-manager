@@ -25,7 +25,6 @@ export const workplaceAccountsToggleSwitch = (id, active) => {
 } 
 
 export const persistWorkplaceAccount = (methodType, accountInfo) => {
-    console.log("account info: ", accountInfo);
     return dispatch => {
         dispatch(updateWorkplaceAccount(accountInfo));
         fetch('/workplace_accounts', { 
