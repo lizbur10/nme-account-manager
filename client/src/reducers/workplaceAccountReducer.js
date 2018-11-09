@@ -11,22 +11,37 @@ const reducer = (state = initialState, action) => {
             }
         case 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE':
             const active = action.active;
-            const updatedWorkplaces = state.workplaceAccounts.map(account => 
+            const updatedActiveWorkplaces = state.workplaceAccounts.map(account => 
                 (account.id === action.id ? Object.assign({}, account, { active }) : account))
             return {
                 ...state,
-                workplaceAccounts: updatedWorkplaces // THIS SEEMS WRONG BUT IT'S WORKING
+                workplaceAccounts: updatedActiveWorkplaces // ??? IS THIS GOOD PRACTICE?
             }
         case 'UPDATE_WORKPLACE_ACCOUNT':
-            return state.workplaceAccounts.map(account => {
-                if (account.id === action.accountInfo.id) {
-                    return {
-                        ...account,
-                        ...action.accountInfo
-                    }
-                } 
-                return account;
-            })
+            const updatedWorkplaceAccounts = state.workplaceAccounts.map(account => 
+                (account.id === action.accountInfo.id ? Object.assign({}, action.accountInfo) : account))
+            return {
+                ...state,
+                workplaceAccounts: updatedWorkplaceAccounts
+            };
+        case 'ADD_WORKPLACE_ACCOUNT':
+            const newAccount = action.accountInfo;
+            return {
+                ...state,
+                workplaceAccounts: {
+                    ...state.workplaceAccounts,
+                    newAccount
+                }
+            };
+        // return state.workplaceAccounts.map(account => {
+            //     if (account.id === action.accountInfo.id) {
+            //         return {
+            //             ...account,
+            //             ...action.accountInfo
+            //         }
+            //     } 
+            //     return account;
+            // })
         
         default: 
             return state;
