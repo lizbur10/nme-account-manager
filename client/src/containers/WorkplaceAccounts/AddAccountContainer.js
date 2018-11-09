@@ -63,9 +63,11 @@ class AddWorkplaceAccountContainer extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state.workplaceAccount)
-        }).then(
-            this.props.history.push('/workplace_accounts')
-        )
+        }).then(response => {
+            this.props.history.push('/workplace_accounts');
+            console.log(response);
+        })
+          .catch(error => console.log(error))
     }
 
     // componentDidMount() {

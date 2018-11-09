@@ -4,32 +4,62 @@ import Manager from '../../components/Manager/fullInfo';
 
 class AddManagerContainer extends Component {
     state = {
-        manager: []
+        manager: {
+            active: true
+        }
     }
 
     // NO REDUX
     handleChange = event => {
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-        this.setState({
-            manager: {
-                ...this.state.manager,
-                [event.target.name]: value
-            }
-        })
+        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        // this.setState({
+        //     manager: {
+        //         ...this.state.manager,
+        //         [event.target.name]: value
+        //     }
+        // })
+        let value;
+        let newMarket = null;
+        if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MARKET
+            value = this.props.markets.filter(market =>
+                market.name.toLowerCase() === event.target.value)[0];
+            newMarket = value.id;
+        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
+        if (newMarket) {
+            this.setState({
+                manager: {
+                    ...this.state.manager,
+                    market_id: newMarket,
+                    [event.target.name]: value
+                }
+            })    
+
+        } else {
+            this.setState({
+                manager: {
+                    ...this.state.manager,
+                    [event.target.name]: value
+                }
+            })    
+        }
     }
 
     // -> REDUX
-    handleReassignMarket = (event) => {
-        const newMarket = this.props.markets.filter(market =>
-            market.name.toLowerCase() === event.target.value)[0];
-        this.setState({
-            manager: {
-                ...this.state.manager,
-                market_id: newMarket.id,
-                market: newMarket
-            }
-        })
-    }
+    // handleReassignMarket = (event) => {
+    //     const newMarket = this.props.markets.filter(market =>
+    //         market.name.toLowerCase() === event.target.value)[0];
+    //     this.setState({
+    //         manager: {
+    //             ...this.state.manager,
+    //             market_id: newMarket.id,
+    //             market: newMarket
+    //         }
+    //     })
+    // }
 
     // -> ASYNC
     handleSubmit = event => {
@@ -39,10 +69,12 @@ class AddManagerContainer extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
-        }).then(
-            this.props.history.push('/managers')
-        )
+            body: JSON.stringify(this.state.manager)
+        }).then(response => {
+            this.props.history.push('/managers');
+            console.log(response);
+        })
+          .catch(error => console.log(error))
     }
 
     // componentDidMount() {
@@ -63,7 +95,6 @@ class AddManagerContainer extends Component {
                 <Manager 
                     managerInfo={this.state.manager} 
                     handleChange={this.handleChange} 
-                    handleReassignMarket={this.handleReassignMarket}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
@@ -74,7 +105,7 @@ class AddManagerContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-      markets: state.markets
+      markets: state.market.markets
     };
   };
 
