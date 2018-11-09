@@ -11,21 +11,33 @@ class ManagerContainer extends Component {
     // NO REDUX
     handleChange = event => {
         let value;
+        let newMarket = null;
         if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MARKET
             value = this.props.markets.filter(market =>
                 market.name.toLowerCase() === event.target.value)[0];
-            
+            newMarket = value.id;
         } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
             value = event.target.checked;
         } else {
             value = event.target.value;
         }
-        this.setState({
-            manager: {
-                ...this.state.manager,
-                [event.target.name]: value
-            }
-        })
+        if (newMarket) {
+            this.setState({
+                manager: {
+                    ...this.state.manager,
+                    market_id: newMarket,
+                    [event.target.name]: value
+                }
+            })    
+
+        } else {
+            this.setState({
+                manager: {
+                    ...this.state.manager,
+                    [event.target.name]: value
+                }
+            })    
+        }
     }
 
     // -> ASYNC
