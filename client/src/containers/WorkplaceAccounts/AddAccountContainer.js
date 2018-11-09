@@ -4,32 +4,55 @@ import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 
 class AddWorkplaceAccountContainer extends Component {
     state = {
-        workplace_account: []
+        workplaceAccount: {
+            active: true
+        }
     }
 
     // NO REDUX
     handleChange = event => {
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-        this.setState({
-            workplace_account: {
-                ...this.state.workplace_account,
-                [event.target.name]: value
-            }
-        })
+        let value;
+        let newManager = null;
+        if ( event.target.type === 'select-one' && event.target.name === 'manager') { // HANDLES DROP-DOWN TO SELECT MANAGER
+            value = this.props.managers.filter(manager =>
+                manager.name.toLowerCase() === event.target.value)[0];
+            newManager = value.id;
+        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
+        if (newManager) {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    manager_id: newManager,
+                    [event.target.name]: value
+                }
+            })
+        } else {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    [event.target.name]: value
+                }
+            })
+    
+        }
     }
 
     // -> REDUX
-    handleReassignManager = (event) => {
-        const newManager = this.props.managers.filter(manager =>
-            manager.name.toLowerCase() === event.target.value)[0];
-        this.setState({
-            workplace_account: {
-                ...this.state.workplace_account,
-                manager_id: newManager.id,
-                manager: newManager
-            }
-        })
-    }
+    // handleReassignManager = (event) => {
+    //     const newManager = this.props.managers.filter(manager =>
+    //         manager.name.toLowerCase() === event.target.value)[0];
+    //     this.setState({
+    //         workplace_account: {
+    //             ...this.state.workplaceAccount,
+    //             manager_id: newManager.id,
+    //             manager: newManager
+    //         }
+    //     })
+    // }
 
     // -> ASYNC
     handleSubmit = event => {
@@ -39,7 +62,7 @@ class AddWorkplaceAccountContainer extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(this.state.workplaceAccount)
         }).then(
             this.props.history.push('/workplace_accounts')
         )
@@ -60,10 +83,9 @@ class AddWorkplaceAccountContainer extends Component {
             <React.Fragment>
                 <h2>Add New Account</h2>
                 <WorkplaceAccount 
-                    companyInfo={this.state.workplace_account} 
+                    companyInfo={this.state.workplaceAccount} 
                     managers={this.props.managers}
                     handleChange={this.handleChange} 
-                    handleReassignManager={this.handleReassignManager}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
@@ -74,7 +96,7 @@ class AddWorkplaceAccountContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-      managers: state.managers
+      managers: state.manager.managers
     };
   };
 

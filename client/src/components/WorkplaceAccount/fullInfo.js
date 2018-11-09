@@ -93,7 +93,7 @@ class WorkplaceAccount extends Component {
             return (
                 <div>Special Instructions: <br /><br /> 
                     <textarea onChange={this.props.handleChange} 
-                    name="specialInstructions" 
+                    name="special_instructions" 
                     value={handleBlank("special_instructions")}></textarea>
                 </div>
             );
