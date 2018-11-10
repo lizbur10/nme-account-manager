@@ -11,7 +11,71 @@ class AddManagerContainer extends Component {
         }
     }
 
-    // NO REDUX
+    createFields = () => {
+        let fields = [];
+        return fields
+            .concat(this.returnActive())
+            .concat(this.returnMarketSelect())
+            .concat(this.returnManagerInfo("name"))
+            .concat(this.returnManagerInfo("email"))
+            .concat(this.returnManagerInfo("phone"));
+    }
+
+    returnActive = () => { 
+        return (
+            <label key="active">
+                Manager Active:
+                <label className="switch">
+                    <input 
+                        name="active"
+                        type="checkbox" 
+                        checked={!!this.state.manager["active"]} 
+                        onChange={this.handleChange} />
+                    <span className="slider"></span>
+                </label>
+            </label>
+        )
+    }
+
+    returnMarketSelect = () => {
+        let value;
+        this.state.manager["market"] ? value=this.state.manager["market"]["name"].toLowerCase() : value = "select_market";
+        return (
+            <p key="market_select">Market:
+                <select onChange={this.handleChange} 
+                    name="market" 
+                    value={value} >
+                        <option value="select_market">Select Market</option>
+                        <option value="albany">Albany</option>
+                        <option value="boston">Boston</option>                            
+               </select>
+            </p>
+        )
+    }
+
+    labelMaker = (varName) => {
+        return varName
+            .replace(/_/g, " ")
+            .split(/\s/)
+            .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+            .join(' ');
+    }
+
+    handleBlank = (fieldName) => {
+        if (this.state.manager[fieldName] == null) {
+            return "";
+        } else {
+            return this.state.manager[fieldName];
+        }
+    }
+
+    returnManagerInfo = (managerInfoKey) => {
+        return(
+            <p key={managerInfoKey}>{this.labelMaker(managerInfoKey)}: <input onChange={this.handleChange} type="text" name={managerInfoKey} value={this.handleBlank(managerInfoKey)} /></p>
+        );
+    }
+
+    // LOCAL STATE
     handleChange = event => {
         // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         // this.setState({
@@ -99,7 +163,8 @@ class AddManagerContainer extends Component {
             <React.Fragment>
                 <h2>Add New Account Manager</h2>
                 <Manager 
-                    managerInfo={this.state.manager} 
+                    // managerInfo={this.state.manager} 
+                    createFields={this.createFields}
                     handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
