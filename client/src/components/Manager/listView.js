@@ -11,15 +11,15 @@ class ManagerList extends Component {
             <tr>
               <th>Active</th><th>Name</th><th>Email</th><th>Phone</th>
             </tr>
-            { this.props.managers.map(manager => 
-            <ManagerSummary 
-              key={manager.id} 
-              id={manager.id}
-              active={manager.active}
-              name={manager.name} 
-              email={manager.email} 
-              phone={manager.phone}
-              toggleSwitch={this.props.toggleSwitch} />) }
+            { this.props.managers.map(manager =>               
+              <ManagerSummary 
+                key={(manager.id ? manager.id : "new_manager")} 
+                id={manager.id}
+                active={manager.active}
+                name={manager.name} 
+                email={manager.email} 
+                phone={manager.phone}
+                toggleSwitch={this.props.toggleSwitch} />) }
           </tbody>
         </table>
       </div>
