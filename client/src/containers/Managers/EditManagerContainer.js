@@ -10,7 +10,7 @@ class ManagerContainer extends Component {
     }
 
     createFields = () => {
-        let fields = [];
+        const fields = [];
         return fields
             .concat(this.returnActive())
             .concat(this.returnMarketSelect())
@@ -158,8 +158,8 @@ class ManagerContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const manager = state.manager.managers.filter(manager =>
-        manager.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+    const manager = state.manager.managers.filter(m =>
+        m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
     return {
         manager: manager,
         markets: state.market.markets
