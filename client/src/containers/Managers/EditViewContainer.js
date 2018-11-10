@@ -45,6 +45,7 @@ class ManagerContainer extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmitUpdatedManager(this.state.manager);
+        this.props.history.push('/managers');
 
         // event.preventDefault();
         // fetch('/managers/' + this.props.match.params.id, { 

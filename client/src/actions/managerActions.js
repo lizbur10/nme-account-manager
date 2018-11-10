@@ -34,7 +34,7 @@ export const persistNewManager = (managerInfo) => {
             },
             body: JSON.stringify(managerInfo)
         }).then(response => {
-            // ADD SUCCESS MESSAGE AND REDIRECT 
+            // ADD SUCCESS MESSAGE  
             console.log(response);
         })
           .catch(error => console.log(error))
@@ -59,7 +59,7 @@ export const persistUpdatedManager = (managerInfo) => {
             },
             body: JSON.stringify(managerInfo)
         }).then(response => {
-            // ADD SUCCESS MESSAGE AND REDIRECT 
+            // ADD SUCCESS MESSAGE
             console.log(response);
         })
           .catch(error => console.log(error))

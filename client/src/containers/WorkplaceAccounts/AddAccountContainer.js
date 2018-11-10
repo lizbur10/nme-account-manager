@@ -58,6 +58,7 @@ class AddWorkplaceAccountContainer extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
+        this.props.history.push('/workplace_accounts');
         // fetch('/workplace_accounts', { 
         //     method: "POST",
         //     headers: {

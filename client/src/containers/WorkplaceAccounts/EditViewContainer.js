@@ -77,6 +77,7 @@ class WorkplaceAccountContainer extends Component {
     componentDidMount() {
         this.props.onFetchWorkplaceAccounts();
         this.props.onFetchManagers();
+        this.props.history.push('/workplace_accounts');
     //     Promise.all([
     //         fetch('/workplace_accounts/' + this.props.match.params.id),
     //         fetch('/managers')
