@@ -25,20 +25,20 @@ class ManagerListContainer extends React.Component {
     // }
 
     // -> ASYNC
-    persistUpdate = (id) => {
-      let managerIndex = this.props.managers.findIndex(function(manager) {
-        return manager.id === id;
-      })
-      fetch('/managers/' + id, { 
-        method: "PATCH",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.props.managers[managerIndex])
-      })
-    }
+    // persistUpdate = (id) => {
+    //   let managerIndex = this.props.managers.findIndex(function(manager) {
+    //     return manager.id === id;
+    //   })
+    //   fetch('/managers/' + id, { 
+    //     method: "PATCH",
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(this.props.managers[managerIndex])
+    //   })
+    // }
 
-    // -> REDUX FOR GETTING MARKETS ONLY -- DONE
+
     separateMarkets = () => {
       const marketsArray = this.props.markets;
       const marketArray = [];
@@ -48,12 +48,10 @@ class ManagerListContainer extends React.Component {
             return manager.market.name.toLowerCase() === marketsArray[i].name.toLowerCase();
           })
         }
-  
       }
       return marketArray;
     }
 
-    // NO REDUX - PAGE DISPLAY ONLY
     returnMarket = (marketArray) => {
       if ( marketArray[0] ) {
         return marketArray[0].market.name.charAt(0).toUpperCase() + marketArray[0].market.name.slice(1)
@@ -101,7 +99,7 @@ class ManagerListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch(managerActions.managersToggleSwitch(id, active)),
+        onToggleSwitch: (manager, active) => dispatch(managerActions.managersToggleSwitch(manager, active)),
         onFetchManagers: () => dispatch( managerActions.fetchManagers()),
         onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
     };

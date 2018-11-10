@@ -16,10 +16,10 @@ export const fetchManagers = () => {
     };
 }  
 
-export const managersToggleSwitch = (id, active) => {
+export const managersToggleSwitch = (manager, active) => {
     return {
         type: 'MANAGER_TOGGLE_ACTIVE',
-        id: id,
+        id: manager.id,
         active: active
     };
 } 

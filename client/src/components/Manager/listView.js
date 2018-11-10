@@ -14,11 +14,7 @@ class ManagerList extends Component {
             { this.props.managers.map(manager =>               
               <ManagerSummary 
                 key={(manager.id ? manager.id : "new_manager")} 
-                id={manager.id}
-                active={manager.active}
-                name={manager.name} 
-                email={manager.email} 
-                phone={manager.phone}
+                manager={manager}
                 toggleSwitch={this.props.toggleSwitch} />) }
           </tbody>
         </table>
