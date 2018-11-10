@@ -28,10 +28,7 @@ const reducer = (state = initialState, action) => {
             const newAccount = action.accountInfo;
             return {
                 ...state,
-                workplaceAccounts: {
-                    ...state.workplaceAccounts,
-                    newAccount
-                }
+                workplaceAccounts: state.workplaceAccounts.concat( newAccount )
             };
         // return state.workplaceAccounts.map(account => {
             //     if (account.id === action.accountInfo.id) {

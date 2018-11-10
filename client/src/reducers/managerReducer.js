@@ -30,10 +30,7 @@ const reducer = (state = initialState, action) => {
             const newManager = action.managerInfo;
             return {
                 ...state,
-                managers: {
-                    ...state.managers,
-                    newManager
-                }
+                managers: state.managers.concat( newManager )
             };
         default: 
             return state;
