@@ -14,12 +14,13 @@ class WorkplaceAccountList extends Component {
             { this.props.workplaceAccounts.map(workplaceAccount => 
               <WorkplaceAccountSummary 
                 key={workplaceAccount.id} 
-                id={workplaceAccount.id}
-                active={workplaceAccount.active}
-                delivery_day={workplaceAccount.delivery_day}
-                manager={workplaceAccount.manager["name"]}
-                company_name={workplaceAccount.company_name} 
-                company_city={workplaceAccount.company_city} 
+                workplaceAccount={workplaceAccount}
+                // id={workplaceAccount.id}
+                // active={workplaceAccount.active}
+                // delivery_day={workplaceAccount.delivery_day}
+                // manager={workplaceAccount.manager["name"]}
+                // company_name={workplaceAccount.company_name} 
+                // company_city={workplaceAccount.company_city} 
                 toggleSwitch={this.props.toggleSwitch} />) }
           </tbody>
         </table>

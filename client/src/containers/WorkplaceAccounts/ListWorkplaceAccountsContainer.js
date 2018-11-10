@@ -24,20 +24,19 @@ class WorkplaceAccountListContainer extends React.Component {
     // }
 
     // -> ASYNC
-    persistUpdate = (id) => {
-      let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
-        return account.id === id;
-      })
-      fetch('/workplace_accounts/' + id, { 
-        method: "PATCH",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.props.workplaceAccounts[accountIndex])
-      })
-    }
+    // persistUpdate = (id) => {
+    //   let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
+    //     return account.id === id;
+    //   })
+    //   fetch('/workplace_accounts/' + id, { 
+    //     method: "PATCH",
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(this.props.workplaceAccounts[accountIndex])
+    //   })
+    // }
 
-    // NO REDUX - PAGE DISPLAY ONLY
     separateDays = () => {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
@@ -51,7 +50,6 @@ class WorkplaceAccountListContainer extends React.Component {
       return dayArray;
     }
 
-    // NO REDUX - PAGE DISPLAY ONLY
     returnDay = (dayArray) => {
       if ( dayArray[0] ) {
         return dayArray[0]["delivery_day"].charAt(0).toUpperCase() + dayArray[0]["delivery_day"].slice(1)
@@ -99,7 +97,7 @@ class WorkplaceAccountListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (id, active) => dispatch( workplaceAccountActions.workplaceAccountsToggleSwitch(id, active) ),
+        onToggleSwitch: (workplaceAccount, active) => dispatch( workplaceAccountActions.workplaceAccountsToggleSwitch(workplaceAccount, active) ),
         onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
         onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
     };

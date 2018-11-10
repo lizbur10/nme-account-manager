@@ -16,10 +16,10 @@ export const fetchWorkplaceAccounts = () => {
     };
 }
 
-export const workplaceAccountsToggleSwitch = (id, active) => {
+export const workplaceAccountsToggleSwitch = (workplaceAccount, active) => {
     return {
         type: 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE',
-        id: id,
+        id: workplaceAccount.id,
         active: active
     };
 } 
