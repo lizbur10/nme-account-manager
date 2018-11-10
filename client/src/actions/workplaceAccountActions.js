@@ -34,7 +34,7 @@ export const persistNewWorkplaceAccount = (accountInfo) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
-            // ADD SUCCESS MESSAGE
+            alert("Account successfully added");
             console.log(response);
         })
           .catch(error => console.log(error))
@@ -60,6 +60,7 @@ export const persistUpdatedWorkplaceAccount = (accountInfo) => {
             body: JSON.stringify(accountInfo)
         }).then(response => {
             // ADD SUCCESS MESSAGE
+            alert("Account successfully updated");
             console.log(response);
         })
           .catch(error => console.log(error))

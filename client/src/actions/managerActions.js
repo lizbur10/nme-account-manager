@@ -35,6 +35,7 @@ export const persistNewManager = (managerInfo) => {
             body: JSON.stringify(managerInfo)
         }).then(response => {
             // ADD SUCCESS MESSAGE  
+            alert("Manager successfully added");
             console.log(response);
         })
           .catch(error => console.log(error))
@@ -60,6 +61,7 @@ export const persistUpdatedManager = (managerInfo) => {
             body: JSON.stringify(managerInfo)
         }).then(response => {
             // ADD SUCCESS MESSAGE
+            alert("Manager information successfully updated");
             console.log(response);
         })
           .catch(error => console.log(error))

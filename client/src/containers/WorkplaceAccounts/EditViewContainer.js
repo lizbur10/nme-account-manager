@@ -46,6 +46,7 @@ class WorkplaceAccountContainer extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
+        this.props.history.push('/workplace_accounts');
 
         // fetch('/workplace_accounts/' + this.props.match.params.id, { 
         //     method: "PATCH",
@@ -77,7 +78,6 @@ class WorkplaceAccountContainer extends Component {
     componentDidMount() {
         this.props.onFetchWorkplaceAccounts();
         this.props.onFetchManagers();
-        this.props.history.push('/workplace_accounts');
     //     Promise.all([
     //         fetch('/workplace_accounts/' + this.props.match.params.id),
     //         fetch('/managers')
