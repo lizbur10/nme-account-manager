@@ -57,7 +57,7 @@ class AddWorkplaceAccountContainer extends Component {
     // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        this.props.onSubmitWorkplaceAccount("POST", this.state.workplaceAccount);
+        this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
         // fetch('/workplace_accounts', { 
         //     method: "POST",
         //     headers: {
@@ -105,7 +105,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitWorkplaceAccount: (methodType, accountInfo) => dispatch( workplaceAccountActions.persistWorkplaceAccount(methodType, accountInfo))
+        onSubmitWorkplaceAccount: (accountInfo) => dispatch( workplaceAccountActions.persistNewWorkplaceAccount(accountInfo))
     }
 };
 

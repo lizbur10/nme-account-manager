@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
+import * as workplaceAccountActions from '../../actions/index';
 
 
 class WorkplaceAccountContainer extends Component {
@@ -44,17 +45,19 @@ class WorkplaceAccountContainer extends Component {
     // ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/workplace_accounts/' + this.props.match.params.id, { 
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.workplaceAccount)
-        }).then(response => {
-            this.props.history.push('/workplace_accounts');
-            console.log(response);
-          })
-          .catch(error => console.log(error))
+        this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
+
+        // fetch('/workplace_accounts/' + this.props.match.params.id, { 
+        //     method: "PATCH",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(this.state.workplaceAccount)
+        // }).then(response => {
+        //     this.props.history.push('/workplace_accounts');
+        //     console.log(response);
+        //   })
+        //   .catch(error => console.log(error))
 
     }
 
@@ -71,7 +74,9 @@ class WorkplaceAccountContainer extends Component {
         );
     }
 
-    // componentDidMount() {
+    componentDidMount() {
+        this.props.onFetchWorkplaceAccounts();
+        this.props.onFetchManagers();
     //     Promise.all([
     //         fetch('/workplace_accounts/' + this.props.match.params.id),
     //         fetch('/managers')
@@ -81,7 +86,7 @@ class WorkplaceAccountContainer extends Component {
     //         workplace_account: data1, 
     //         managers: data2
     //     }));
-    //     }
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -93,4 +98,12 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-export default connect(mapStateToProps)(WorkplaceAccountContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
+        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
+        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(WorkplaceAccountContainer);
