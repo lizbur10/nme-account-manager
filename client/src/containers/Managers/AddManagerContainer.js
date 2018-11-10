@@ -165,7 +165,7 @@ class AddManagerContainer extends Component {
                 <Manager 
                     // managerInfo={this.state.manager} 
                     createFields={this.createFields}
-                    handleChange={this.handleChange} 
+                    // handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );

@@ -19,7 +19,6 @@ class ManagerContainer extends Component {
             .concat(this.returnManagerInfo("phone"));
     }
 
-
     returnActive = () => { 
         return (
             <label key="active">
@@ -135,7 +134,7 @@ class ManagerContainer extends Component {
                     // managerInfo={this.state.manager} 
                     // markets={this.props.markets}
                     createFields={this.createFields}
-                    handleChange={this.handleChange}
+                    // handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
