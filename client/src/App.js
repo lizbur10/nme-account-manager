@@ -4,7 +4,7 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 //WORKPLACE ACCOUNT IMPORTS
 import WorkplaceAccountListContainer from './containers/WorkplaceAccounts/ListWorkplaceAccountsContainer';
 import WorkplaceAccountContainer from './containers/WorkplaceAccounts/EditWorkplaceAccountContainer';
-import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddAccountContainer';
+import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddWorkplaceAccountContainer';
 
 //MANAGER IMPORTS
 import ManagerListContainer from './containers/Managers/ListManagersContainer';
