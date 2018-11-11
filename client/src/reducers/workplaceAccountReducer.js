@@ -29,17 +29,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 workplaceAccounts: state.workplaceAccounts.concat( newAccount )
-            };
-        // return state.workplaceAccounts.map(account => {
-            //     if (account.id === action.accountInfo.id) {
-            //         return {
-            //             ...account,
-            //             ...action.accountInfo
-            //         }
-            //     } 
-            //     return account;
-            // })
-        
+            };        
         default: 
             return state;
     }

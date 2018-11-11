@@ -6,37 +6,6 @@ import WorkplaceAccountList from '../../components/WorkplaceAccount/listView';
 import * as workplaceAccountActions from '../../actions/index';
 
 class WorkplaceAccountListContainer extends React.Component {
-    // constructor() {
-    //   super()
-   
-    //   this.state = {
-    //     workplaceAccounts: []
-    //   };
-    // }
-
-    // toggleSwitch = (id, active) => {
-    //   this.setState({
-    //     workplaceAccounts: this.props.workplaceAccounts.map(account => 
-    //       (account.id === id ? Object.assign({}, account, { active }) : account))
-    //   }, function () {
-    //     this.persistUpdate(id);
-    //   })
-    // }
-
-    // -> ASYNC
-    // persistUpdate = (id) => {
-    //   let accountIndex = this.props.workplaceAccounts.findIndex(function(account) {
-    //     return account.id === id;
-    //   })
-    //   fetch('/workplace_accounts/' + id, { 
-    //     method: "PATCH",
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(this.props.workplaceAccounts[accountIndex])
-    //   })
-    // }
-
     separateDays = () => {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
@@ -61,13 +30,6 @@ class WorkplaceAccountListContainer extends React.Component {
     componentDidMount() {
       this.props.onFetchWorkplaceAccounts();
       this.props.onFetchManagers();
-      //   fetch('/workplace_accounts') 
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState({
-    //         workplaceAccounts: data
-    //     })
-    //   })
     }
 
     render() {
