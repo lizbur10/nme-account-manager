@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 import * as workplaceAccountActions from '../../actions/index';
 
@@ -187,9 +188,9 @@ class WorkplaceAccountContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.onFetchWorkplaceAccounts();
-        this.props.onFetchManagers();
-        this.props.onFetchMarkets();
+        this.props.fetchWorkplaceAccounts();
+        this.props.fetchManagers();
+        this.props.fetchMarkets();
     }
 }
 
@@ -213,9 +214,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitWorkplaceAccount: (accountInfo) => dispatch( workplaceAccountActions.persistNewWorkplaceAccount(accountInfo)),
         onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
-        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
-        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers()),
-        onFetchMarkets: () => dispatch( workplaceAccountActions.fetchMarkets())
+        fetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
+        fetchManagers: () => dispatch( workplaceAccountActions.fetchManagers()),
+        fetchMarkets: () => dispatch( workplaceAccountActions.fetchMarkets())
     }
 };
 

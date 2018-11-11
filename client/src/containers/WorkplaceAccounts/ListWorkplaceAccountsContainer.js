@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import WorkplaceAccountList from '../../components/WorkplaceAccount/listView';
 import * as workplaceAccountActions from '../../actions/index';
 
-class WorkplaceAccountListContainer extends React.Component {
+class WorkplaceAccountListContainer extends Component {
+
     separateDays = () => {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
@@ -27,9 +28,14 @@ class WorkplaceAccountListContainer extends React.Component {
       }
     } 
 
+    toggleSwitch = (accountInfo, active) => {
+      const updatedAccount = Object.assign({}, accountInfo, { active });
+      this.props.onSubmitUpdatedAccount(updatedAccount);
+    }
+
     componentDidMount() {
-      this.props.onFetchWorkplaceAccounts();
-      this.props.onFetchManagers();
+      this.props.fetchWorkplaceAccounts();
+      this.props.fetchManagers();
     }
 
     render() {
@@ -40,11 +46,10 @@ class WorkplaceAccountListContainer extends React.Component {
                 <h2>{this.returnDay(day)}</h2>
                 <WorkplaceAccountList 
                   workplaceAccounts={day}
-                  toggleSwitch={this.props.onToggleSwitch} />
+                  toggleSwitch={this.toggleSwitch} />
               </div> 
           )}
-        <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
-        
+          <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
         </div>
       )
     }
@@ -59,9 +64,9 @@ class WorkplaceAccountListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onToggleSwitch: (workplaceAccount, active) => dispatch( workplaceAccountActions.workplaceAccountsToggleSwitch(workplaceAccount, active) ),
-        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
-        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
+        onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
+        fetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
+        fetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
     };
   };
 

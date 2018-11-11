@@ -16,13 +16,13 @@ export const fetchWorkplaceAccounts = () => {
     };
 }
 
-export const workplaceAccountsToggleSwitch = (workplaceAccount, active) => {
-    return {
-        type: 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE',
-        id: workplaceAccount.id,
-        active: active
-    };
-} 
+// export const workplaceAccountsToggleSwitch = (workplaceAccount, active) => {
+//     return {
+//         type: 'WORKPLACE_ACCOUNT_TOGGLE_ACTIVE',
+//         id: workplaceAccount.id,
+//         active: active
+//     };
+// } 
 
 export const persistNewWorkplaceAccount = (accountInfo) => {
     return dispatch => {
