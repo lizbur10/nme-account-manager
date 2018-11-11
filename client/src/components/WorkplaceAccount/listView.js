@@ -13,7 +13,7 @@ class WorkplaceAccountList extends Component {
             </tr>
             { this.props.workplaceAccounts.map(workplaceAccount => 
               <WorkplaceAccountSummary 
-                key={workplaceAccount.id} 
+                key={(workplaceAccount.id ? workplaceAccount.id : "new_account")} 
                 workplaceAccount={workplaceAccount}
                 // id={workplaceAccount.id}
                 // active={workplaceAccount.active}

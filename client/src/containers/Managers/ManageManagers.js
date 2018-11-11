@@ -133,15 +133,14 @@ class ManagerContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps);
-    if (ownProps.match.params.id) {
+    if (ownProps.match.params.id) { // HANDLES EDIT/UPDATE CASE
         const manager = state.manager.managers.filter(m =>
             m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
         return {
             manager: manager,
             markets: state.market.markets
         };
-    } else {
+    } else { // HANDLES NEW CASE
         return {
             manager: {active: true},
             markets: state.market.markets
