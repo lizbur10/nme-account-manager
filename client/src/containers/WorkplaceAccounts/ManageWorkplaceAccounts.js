@@ -3,42 +3,10 @@ import { connect } from 'react-redux';
 import WorkplaceAccount from '../../components/WorkplaceAccount/fullInfo';
 import * as workplaceAccountActions from '../../actions/index';
 
-class AddWorkplaceAccountContainer extends Component {
-    state = {
-        workplaceAccount: {
-            active: true
-        }
-    }
 
-    // NO REDUX
-    handleChange = event => {
-        let value;
-        let newManager = null;
-        if ( event.target.type === 'select-one' && event.target.name === 'manager') { // HANDLES DROP-DOWN TO SELECT MANAGER
-            value = this.props.managers.filter(manager =>
-                manager.name.toLowerCase() === event.target.value)[0];
-            newManager = value.id;
-        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
-            value = event.target.checked;
-        } else {
-            value = event.target.value;
-        }
-        if (newManager) { 
-            this.setState({
-                workplaceAccount: {
-                    ...this.state.workplaceAccount,
-                    manager_id: newManager,
-                    [event.target.name]: value
-                }
-            })
-        } else {
-            this.setState({
-                workplaceAccount: {
-                    ...this.state.workplaceAccount,
-                    [event.target.name]: value
-                }
-            })    
-        }
+class WorkplaceAccountContainer extends Component {
+    state = {
+        workplaceAccount: this.props.workplaceAccount
     }
 
     createFields = () => {
@@ -98,7 +66,8 @@ class AddWorkplaceAccountContainer extends Component {
                     value={value} >
                         <option value="select_manager">Select Manager</option>
                         {this.createManagerList()}
-       </select></p>
+                </select>
+            </p>
         )
     }
 
@@ -154,61 +123,87 @@ class AddWorkplaceAccountContainer extends Component {
         );
     }
 
-    // -> ASYNC
-    handleSubmit = event => {
-        event.preventDefault();
-        this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
-        this.props.history.push('/workplace_accounts');
-        // fetch('/workplace_accounts', { 
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(this.state.workplaceAccount)
-        // }).then(response => {
-        //     this.props.history.push('/workplace_accounts');
-        //     console.log(response);
-        // })
-        //   .catch(error => console.log(error))
+    // LOCAL STATE
+    handleChange = event => {
+        let value;
+        let newManager = null;
+        if ( event.target.type === 'select-one' && event.target.name === 'manager') { // HANDLES DROP-DOWN TO SELECT MANAGER
+            value = this.props.managers.filter(manager =>
+                manager.name.toLowerCase() === event.target.value)[0];
+            newManager = value.id;
+        } else if (event.target.type === 'checkbox') { // HANDLES ACTIVE/INACTIVE TOGGLE 
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
+        if (newManager) {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    manager_id: newManager,
+                    [event.target.name]: value
+                }
+            })
+        } else {
+            this.setState({
+                workplaceAccount: {
+                    ...this.state.workplaceAccount,
+                    [event.target.name]: value
+                }
+            })
+        }
     }
 
-    // componentDidMount() {
-    //     fetch('/managers') 
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       this.setState({
-    //           managers: data
-    //       })
-    //     })
-    // }
-  
+    handleSubmit = event => {
+        event.preventDefault();
+        if (this.state.workplaceAccount.id) {
+            this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
+        } else {
+            this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
+        }
+        this.props.history.push('/workplace_accounts');
+    }
+
     render () {
         return (
             <React.Fragment>
-                <h2>Add New Account</h2>
+                <h2>Account Details</h2>
                 <WorkplaceAccount 
-                    // companyInfo={this.state.workplaceAccount} 
                     createFields={this.createFields}
-                    managers={this.props.managers}
-                    // handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
     }
 
-
+    componentDidMount() {
+        this.props.onFetchWorkplaceAccounts();
+        this.props.onFetchManagers();
+    }
 }
 
-const mapStateToProps = state => {
-    return {
-      managers: state.manager.managers
-    };
+const mapStateToProps = (state, ownProps) => {
+    if (ownProps.match.params.id) { // HANDLES EDIT/UPDATE CASE
+        const account = state.workplaceAccount.workplaceAccounts.filter(acct =>
+            acct.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+        return {
+            workplaceAccount: account,
+            managers: state.manager.managers
+        }
+    } else { // HANDLES NEW CASE
+        return {
+            workplaceAccount: { active: true },
+            managers: state.manager.managers
+        }
+    }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitWorkplaceAccount: (accountInfo) => dispatch( workplaceAccountActions.persistNewWorkplaceAccount(accountInfo))
+        onSubmitWorkplaceAccount: (accountInfo) => dispatch( workplaceAccountActions.persistNewWorkplaceAccount(accountInfo)),
+        onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
+        onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
+        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddWorkplaceAccountContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(WorkplaceAccountContainer);

@@ -3,8 +3,9 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 
 //WORKPLACE ACCOUNT IMPORTS
 import WorkplaceAccountListContainer from './containers/WorkplaceAccounts/ListWorkplaceAccountsContainer';
-import WorkplaceAccountContainer from './containers/WorkplaceAccounts/EditWorkplaceAccountContainer';
-import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddWorkplaceAccountContainer';
+// import WorkplaceAccountContainer from './containers/WorkplaceAccounts/EditWorkplaceAccountContainer';
+// import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddWorkplaceAccountContainer';
+import WorkplaceAccountContainer from './containers/WorkplaceAccounts/ManageWorkplaceAccounts';
 
 //MANAGER IMPORTS
 import ManagerListContainer from './containers/Managers/ListManagersContainer';
@@ -30,8 +31,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={WorkplaceAccountListContainer} />
           <Route exact path="/workplace_accounts" component={WorkplaceAccountListContainer} />
-          <Route exact path="/workplace_accounts/new" component={AddWorkplaceAccountContainer} />
+          {/* <Route exact path="/workplace_accounts/new" component={AddWorkplaceAccountContainer} />
+          <Route exact path="/workplace_accounts/:id" component={WorkplaceAccountContainer} /> */}
+          <Route exact path="/workplace_accounts/new" component={WorkplaceAccountContainer} />
           <Route exact path="/workplace_accounts/:id" component={WorkplaceAccountContainer} />
+
           <Route exact path="/managers" component={ManagerListContainer} />
           {/* <Route exact path="/managers/new" component={AddManagerContainer} />
           <Route exact path="/managers/:id" component={ManagerContainer} /> */}
