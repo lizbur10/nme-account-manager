@@ -105,13 +105,16 @@ class ManagerContainer extends Component {
         }
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = () => {
         if (this.state.manager.id) {
             this.props.onSubmitUpdatedManager(this.state.manager);
         } else {
             this.props.onSubmitManager(this.state.manager);
         }
+        this.props.history.push('/managers');
+    }
+
+    handleCancel = () => {
         this.props.history.push('/managers');
     }
 
@@ -121,7 +124,8 @@ class ManagerContainer extends Component {
                 <h2>Account Manager Details</h2>
                 <Manager
                     createFields={this.createFields}
-                    handleSubmit={this.handleSubmit} /> 
+                    handleSubmit={this.handleSubmit} 
+                    handleCancel={this.handleCancel}/> 
             </React.Fragment>
         );
     }
@@ -152,6 +156,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitManager: (managerInfo) => dispatch( managerActions.persistNewManager(managerInfo)),
         onSubmitUpdatedManager: (managerInfo) => dispatch( managerActions.persistUpdatedManager(managerInfo)),
+        onFetchWorkplaceAccounts: () => dispatch( managerActions.fetchWorkplaceAccounts()),
         onFetchManagers: () => dispatch( managerActions.fetchManagers()),
         onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
     }

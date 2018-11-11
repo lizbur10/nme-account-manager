@@ -154,13 +154,16 @@ class WorkplaceAccountContainer extends Component {
         }
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = () => {
         if (this.state.workplaceAccount.id) {
             this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
         } else {
             this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
         }
+        this.props.history.push('/workplace_accounts');
+    }
+
+    handleCancel = () => {
         this.props.history.push('/workplace_accounts');
     }
 
@@ -170,7 +173,8 @@ class WorkplaceAccountContainer extends Component {
                 <h2>Account Details</h2>
                 <WorkplaceAccount 
                     createFields={this.createFields}
-                    handleSubmit={this.handleSubmit} /> 
+                    handleSubmit={this.handleSubmit} 
+                    handleCancel={this.handleCancel}/> 
             </React.Fragment>
         );
     }
@@ -178,6 +182,7 @@ class WorkplaceAccountContainer extends Component {
     componentDidMount() {
         this.props.onFetchWorkplaceAccounts();
         this.props.onFetchManagers();
+        this.props.onFetchMarkets();
     }
 }
 
@@ -202,7 +207,8 @@ const mapDispatchToProps = dispatch => {
         onSubmitWorkplaceAccount: (accountInfo) => dispatch( workplaceAccountActions.persistNewWorkplaceAccount(accountInfo)),
         onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
         onFetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
-        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
+        onFetchManagers: () => dispatch( workplaceAccountActions.fetchManagers()),
+        onFetchMarkets: () => dispatch( workplaceAccountActions.fetchMarkets())
     }
 };
 
