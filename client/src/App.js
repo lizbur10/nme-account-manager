@@ -8,8 +8,9 @@ import AddWorkplaceAccountContainer from './containers/WorkplaceAccounts/AddWork
 
 //MANAGER IMPORTS
 import ManagerListContainer from './containers/Managers/ListManagersContainer';
-import ManagerContainer from './containers/Managers/EditManagerContainer';
-import AddManagerContainer from './containers/Managers/AddManagerContainer';
+// import ManagerContainer from './containers/Managers/EditManagerContainer';
+// import AddManagerContainer from './containers/Managers/AddManagerContainer';
+import ManagerContainer from './containers/Managers/ManageManagers';
 
 class App extends Component {
   render () {
@@ -32,7 +33,9 @@ class App extends Component {
           <Route exact path="/workplace_accounts/new" component={AddWorkplaceAccountContainer} />
           <Route exact path="/workplace_accounts/:id" component={WorkplaceAccountContainer} />
           <Route exact path="/managers" component={ManagerListContainer} />
-          <Route exact path="/managers/new" component={AddManagerContainer} />
+          {/* <Route exact path="/managers/new" component={AddManagerContainer} />
+          <Route exact path="/managers/:id" component={ManagerContainer} /> */}
+          <Route exact path="/managers/new" component={ManagerContainer} />
           <Route exact path="/managers/:id" component={ManagerContainer} />
 
           <Route render={() => <h1>Page not found</h1>} />

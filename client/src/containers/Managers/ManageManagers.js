@@ -4,15 +4,13 @@ import Manager from '../../components/Manager/fullInfo';
 import * as managerActions from '../../actions/index';
 
 
-class AddManagerContainer extends Component {
+class ManagerContainer extends Component {
     state = {
-        manager: {
-            active: true
-        }
+        manager: this.props.manager
     }
 
     createFields = () => {
-        let fields = [];
+        const fields = [];
         return fields
             .concat(this.returnActive())
             .concat(this.returnMarketSelect())
@@ -75,15 +73,9 @@ class AddManagerContainer extends Component {
         );
     }
 
+
     // LOCAL STATE
     handleChange = event => {
-        // const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-        // this.setState({
-        //     manager: {
-        //         ...this.state.manager,
-        //         [event.target.name]: value
-        //     }
-        // })
         let value;
         let newMarket = null;
         if ( event.target.type === 'select-one' ) { // HANDLES DROP-DOWN TO SELECT MARKET
@@ -103,7 +95,6 @@ class AddManagerContainer extends Component {
                     [event.target.name]: value
                 }
             })    
-
         } else {
             this.setState({
                 manager: {
@@ -114,76 +105,58 @@ class AddManagerContainer extends Component {
         }
     }
 
-    // -> REDUX
-    // handleReassignMarket = (event) => {
-    //     const newMarket = this.props.markets.filter(market =>
-    //         market.name.toLowerCase() === event.target.value)[0];
-    //     this.setState({
-    //         manager: {
-    //             ...this.state.manager,
-    //             market_id: newMarket.id,
-    //             market: newMarket
-    //         }
-    //     })
-    // }
-
-    // -> ASYNC
     handleSubmit = event => {
         event.preventDefault();
-        this.props.onSubmitManager(this.state.manager);
+        if (this.state.manager.id) {
+            this.props.onSubmitUpdatedManager(this.state.manager);
+        } else {
+            this.props.onSubmitManager(this.state.manager);
+        }
         this.props.history.push('/managers');
-
-        // event.preventDefault();
-        // fetch('/managers', { 
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(this.state.manager)
-        // }).then(response => {
-        //     this.props.history.push('/managers');
-        //     console.log(response);
-        // })
-        //   .catch(error => console.log(error))
     }
-
-    // componentDidMount() {
-    //     fetch('/markets') 
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       this.setState({
-    //           markets: data
-    //       })
-    //     })
-    //   }
-  
 
     render () {
         return (
             <React.Fragment>
-                <h2>Add New Account Manager</h2>
-                <Manager 
-                    // managerInfo={this.state.manager} 
+                <h2>Account Manager Details</h2>
+                <Manager
                     createFields={this.createFields}
-                    // handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} /> 
             </React.Fragment>
         );
     }
 
-
+    componentDidMount() {
+        this.props.onFetchManagers();
+        this.props.onFetchMarkets();
+    }
 }
 
-const mapStateToProps = state => {
-    return {
-      markets: state.market.markets
-    };
-  };
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmitManager: (managerInfo) => dispatch( managerActions.persistNewManager(managerInfo))
+const mapStateToProps = (state, ownProps) => {
+    console.log(ownProps);
+    if (ownProps.match.params.id) {
+        const manager = state.manager.managers.filter(m =>
+            m.id === parseInt(ownProps.match.params.id, 10))[0]; // THE 10 IS TO FIX A 'NO RADIX PARAMETER' WARNING
+        return {
+            manager: manager,
+            markets: state.market.markets
+        };
+    } else {
+        return {
+            manager: {active: true},
+            markets: state.market.markets
+        };
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddManagerContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitManager: (managerInfo) => dispatch( managerActions.persistNewManager(managerInfo)),
+        onSubmitUpdatedManager: (managerInfo) => dispatch( managerActions.persistUpdatedManager(managerInfo)),
+        onFetchManagers: () => dispatch( managerActions.fetchManagers()),
+        onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManagerContainer);
