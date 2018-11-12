@@ -18,7 +18,6 @@ const reducer = (state = initialState, action) => {
                 managers: updatedActiveManagers
             }
         case 'UPDATE_MANAGER':
-            console.log("manager info: ", action.managerInfo);
             const updatedManagers = state.managers.map(manager => 
                 (manager.id === action.managerInfo.id ? Object.assign({}, action.managerInfo) : manager))
             return {
@@ -26,7 +25,6 @@ const reducer = (state = initialState, action) => {
                 managers: updatedManagers
             };
         case 'ADD_MANAGER':
-            // TO BE FILLED IN
             const newManager = action.managerInfo;
             return {
                 ...state,

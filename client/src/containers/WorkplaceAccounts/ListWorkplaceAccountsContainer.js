@@ -30,7 +30,7 @@ class WorkplaceAccountListContainer extends Component {
 
     toggleSwitch = (accountInfo, active) => {
       const updatedAccount = Object.assign({}, accountInfo, { active });
-      this.props.onSubmitUpdatedAccount(updatedAccount);
+      this.props.onSubmitUpdatedAccount(updatedAccount, false);
     }
 
     componentDidMount() {
@@ -64,7 +64,7 @@ class WorkplaceAccountListContainer extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onSubmitUpdatedAccount: (accountInfo) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo)),
+        onSubmitUpdatedAccount: (accountInfo, msg) => dispatch( workplaceAccountActions.persistUpdatedWorkplaceAccount(accountInfo, msg)),
         fetchWorkplaceAccounts: () => dispatch( workplaceAccountActions.fetchWorkplaceAccounts()),
         fetchManagers: () => dispatch( workplaceAccountActions.fetchManagers())
     };

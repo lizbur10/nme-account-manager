@@ -49,7 +49,7 @@ export const addWorkplaceAccount = (accountInfo) => {
     }
 }
 
-export const persistUpdatedWorkplaceAccount = (accountInfo) => {
+export const persistUpdatedWorkplaceAccount = (accountInfo, sendAlert=true) => {
     return dispatch => {
         dispatch(updateWorkplaceAccount(accountInfo));
         fetch('/workplace_accounts/' + accountInfo.id, { 
@@ -59,8 +59,7 @@ export const persistUpdatedWorkplaceAccount = (accountInfo) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
-            // ADD SUCCESS MESSAGE
-            alert("Account successfully updated");
+            (sendAlert === true ? alert("Account successfully updated") : null)
             console.log(response);
         })
           .catch(error => console.log(error))
