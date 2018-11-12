@@ -29,7 +29,7 @@ class ManagerListContainer extends React.Component {
 
     toggleSwitch = (managerInfo, active) => {
       const updatedManager = Object.assign({}, managerInfo, { active });
-      this.props.onSubmitUpdatedManager(updatedManager);
+      this.props.onSubmitUpdatedManager(updatedManager, false);
     }
 
     componentDidMount() {
@@ -63,7 +63,7 @@ class ManagerListContainer extends React.Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-        onSubmitUpdatedManager: (managerInfo) => dispatch( managerActions.persistUpdatedManager(managerInfo)),
+        onSubmitUpdatedManager: (managerInfo, sendAlert) => dispatch( managerActions.persistUpdatedManager(managerInfo, sendAlert)),
         onFetchManagers: () => dispatch( managerActions.fetchManagers()),
         onFetchMarkets: () => dispatch( managerActions.fetchMarkets())
     };

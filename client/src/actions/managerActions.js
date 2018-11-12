@@ -50,7 +50,7 @@ export const addManager = (managerInfo) => {
     }
 }
 
-export const persistUpdatedManager = (managerInfo) => {
+export const persistUpdatedManager = (managerInfo, sendAlert=true) => {
     return dispatch => {
         dispatch(updateManager(managerInfo));
         fetch('/managers/' + managerInfo.id, { 
@@ -61,7 +61,7 @@ export const persistUpdatedManager = (managerInfo) => {
             body: JSON.stringify(managerInfo)
         }).then(response => {
             // ADD SUCCESS MESSAGE
-            alert("Manager information successfully updated");
+            (sendAlert === true ? alert("Manager informatino successfully updated") : null)
             console.log(response);
         })
           .catch(error => console.log(error))
