@@ -59,7 +59,7 @@ export const persistUpdatedWorkplaceAccount = (accountInfo, sendAlert=true) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
-            (sendAlert === true ? alert("Account successfully updated") : null)
+            if (sendAlert === true) { alert("Account successfully updated"); }
             console.log(response);
         })
           .catch(error => console.log(error))

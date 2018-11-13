@@ -61,7 +61,7 @@ export const persistUpdatedManager = (managerInfo, sendAlert=true) => {
             body: JSON.stringify(managerInfo)
         }).then(response => {
             // ADD SUCCESS MESSAGE
-            (sendAlert === true ? alert("Manager informatino successfully updated") : null)
+            if (sendAlert === true) { alert("Account successfully updated"); }
             console.log(response);
         })
           .catch(error => console.log(error))
