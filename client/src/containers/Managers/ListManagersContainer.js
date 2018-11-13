@@ -33,6 +33,7 @@ class ManagerListContainer extends React.Component {
     }
 
     componentDidMount() {
+      window.scrollTo(0, 0);
       this.props.onFetchManagers();
       this.props.onFetchMarkets();
     }

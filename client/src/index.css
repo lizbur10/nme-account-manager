@@ -85,6 +85,12 @@ button {
   border-radius: 4px;
 }
 
+button:hover, .edit-button:hover, .add-new-button:hover {
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+
 
 /* TABLES */
 
