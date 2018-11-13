@@ -1,7 +1,8 @@
 class WorkplaceAccountsController < ApplicationController
     def index
         @workplace_accounts = WorkplaceAccount.all.sort_by do |account|
-            [to_day_of_week(account.delivery_day), account.manager.name, to_start_time(account.delivery_time)]
+            [to_day_of_week(account.delivery_day), account.manager.name, account.company_name]
+            # [to_day_of_week(account.delivery_day), account.manager.name, to_start_time(account.delivery_time)]
         end
         render json: @workplace_accounts
     end
