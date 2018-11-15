@@ -17,7 +17,6 @@ class WorkplaceAccountList extends Component {
                 key={(workplaceAccount.id ? workplaceAccount.id : "new_account")} 
                 workplaceAccount={workplaceAccount}
                 handleClick={this.props.handleClick}
-                counter={this.props.counter}
                 // id={workplaceAccount.id}
                 // active={workplaceAccount.active}
                 // delivery_day={workplaceAccount.delivery_day}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_190415) do
+ActiveRecord::Schema.define(version: 2018_11_15_174906) do
 
   create_table "catering_accounts", force: :cascade do |t|
     t.integer "manager_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_190415) do
     t.text "special_instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "counter", default: 0
   end
 
 end

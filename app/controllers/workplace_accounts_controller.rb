@@ -42,7 +42,8 @@ def account_params
         :hr_contact_email,
         :delivery_day,
         :delivery_time,
-        :special_instructions
+        :special_instructions,
+        :counter
     )
 end
 

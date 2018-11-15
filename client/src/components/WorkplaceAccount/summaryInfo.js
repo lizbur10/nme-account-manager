@@ -25,9 +25,9 @@ class WorkplaceAccountSummary extends Component {
           }}>Edit</Link>
         </td>
         <td>
-          <button onClick={() => this.props.handleClick()}>Click me</button>
+          <button onClick={() => this.props.handleClick(this.props.workplaceAccount, this.props.workplaceAccount.counter + 1)}>Click me</button>
         </td>   
-        <td>{this.props.counter}</td>   
+        <td>{this.props.workplaceAccount.counter}</td>   
       </tr>
     )
   }

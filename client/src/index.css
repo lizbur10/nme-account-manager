@@ -115,7 +115,7 @@ th {
   text-align: center;
 } */
 
-tr td:last-child {
+tr td:last-child, tr td:nth-child(7), tr td:nth-child(6) {
   border: none;
   background-color: white;
 }

@@ -15,6 +15,7 @@ class WorkplaceAccountSerializer < ActiveModel::Serializer
     :hr_contact_email,
     :delivery_day,
     :delivery_time,
-    :special_instructions
+    :special_instructions,
+    :counter
   belongs_to :manager
 end
