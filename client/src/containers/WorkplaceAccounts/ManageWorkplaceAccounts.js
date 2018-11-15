@@ -7,7 +7,8 @@ import * as workplaceAccountActions from '../../actions/index';
 
 class WorkplaceAccountContainer extends Component {
     state = {
-        workplaceAccount: this.props.workplaceAccount
+        workplaceAccount: this.props.workplaceAccount,
+        counter: 0
     }
 
     createFields = () => {
@@ -166,7 +167,9 @@ class WorkplaceAccountContainer extends Component {
         if (this.state.workplaceAccount.id) {
             this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
         } else {
+            console.log('A')
             this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
+            console.log('B')
         }
         this.props.history.push('/workplace_accounts');
     }
@@ -182,7 +185,7 @@ class WorkplaceAccountContainer extends Component {
                 <WorkplaceAccount 
                     createFields={this.createFields}
                     handleSubmit={this.handleSubmit} 
-                    handleCancel={this.handleCancel}/> 
+                    handleCancel={this.handleCancel} />
             </React.Fragment>
         );
     }

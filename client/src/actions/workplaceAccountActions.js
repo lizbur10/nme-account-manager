@@ -26,20 +26,25 @@ export const fetchWorkplaceAccounts = () => {
 
 export const persistNewWorkplaceAccount = (accountInfo) => {
     return dispatch => {
-        dispatch(addWorkplaceAccount(accountInfo));
         fetch('/workplace_accounts', { 
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(accountInfo)
-        }).then(response => {
-            alert("Account successfully added");
-            console.log(response);
+        }) //.then(res => handleErrors(res))
+        .then(response => {
+            dispatch(addWorkplaceAccount(accountInfo)); //switch from accountInfo to response
+            //alert("Account successfully added");
+            //console.log(response);
         })
           .catch(error => console.log(error))
            
     };
+
+    //handleErrors(res) {
+    //    res.ok
+    //}
 }
 
 export const addWorkplaceAccount = (accountInfo) => {

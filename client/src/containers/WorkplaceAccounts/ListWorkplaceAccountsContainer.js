@@ -7,6 +7,10 @@ import * as workplaceAccountActions from '../../actions/index';
 
 class WorkplaceAccountListContainer extends Component {
 
+  state = {
+    counter: 0
+  }
+
     separateDays = () => {
       const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday'];
       const dayArray = [];
@@ -33,6 +37,12 @@ class WorkplaceAccountListContainer extends Component {
       this.props.onSubmitUpdatedAccount(updatedAccount, false);
     }
 
+    handleClick = () => {
+      this.setState({
+          counter: this.state.counter + 1
+      })
+  }
+
     componentDidMount() {
       window.scrollTo(0, 0);
       this.props.fetchWorkplaceAccounts();
@@ -47,8 +57,10 @@ class WorkplaceAccountListContainer extends Component {
                 <h2>{this.returnDay(day)}</h2>
                 <WorkplaceAccountList 
                   workplaceAccounts={day}
-                  toggleSwitch={this.toggleSwitch} />
-              </div> 
+                  toggleSwitch={this.toggleSwitch} 
+                  handleClick={this.handleClick}
+                  counter={this.state.counter}/> 
+            </div> 
           )}
           <Link className="add-new-button" to="/workplace_accounts/new">Add New Account</Link>
         </div>

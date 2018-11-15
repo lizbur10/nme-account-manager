@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class WorkplaceAccountSummary extends Component {
   render () {
+    console.log("summaryInfo props: ", this.props);
     const delivery_day=this.props.workplaceAccount.delivery_day.charAt(0).toUpperCase() + this.props.workplaceAccount.delivery_day.slice(1);
     return (
       <tr>
@@ -23,6 +24,10 @@ class WorkplaceAccountSummary extends Component {
             pathname: "/workplace_accounts/" + this.props.workplaceAccount.id
           }}>Edit</Link>
         </td>
+        <td>
+          <button onClick={() => this.props.handleClick()}>Click me</button>
+        </td>   
+        <td>{this.props.counter}</td>   
       </tr>
     )
   }
