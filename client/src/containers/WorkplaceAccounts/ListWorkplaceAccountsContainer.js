@@ -33,8 +33,9 @@ class WorkplaceAccountListContainer extends Component {
       this.props.onSubmitUpdatedAccount(updatedAccount, false);
     }
 
-    handleClick = (accountInfo, counter) => {
-      const updatedAccount = Object.assign({}, accountInfo, { counter } );
+    handleClick = (accountInfo) => {
+      const newValue = accountInfo.counter + 1;
+      const updatedAccount = Object.assign({}, accountInfo, { counter: newValue } );
       this.props.onSubmitUpdatedAccount(updatedAccount, false);
 
     }

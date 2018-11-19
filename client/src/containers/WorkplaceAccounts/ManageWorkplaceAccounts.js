@@ -167,9 +167,7 @@ class WorkplaceAccountContainer extends Component {
         if (this.state.workplaceAccount.id) {
             this.props.onSubmitUpdatedAccount(this.state.workplaceAccount);
         } else {
-            console.log('A')
             this.props.onSubmitWorkplaceAccount(this.state.workplaceAccount);
-            console.log('B')
         }
         this.props.history.push('/workplace_accounts');
     }

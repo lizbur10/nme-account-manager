@@ -4,7 +4,6 @@ import WorkplaceAccountSummary from '../../components/WorkplaceAccount/summaryIn
 
 class WorkplaceAccountList extends Component {
   render () {
-    console.log("listView props: ", this.props);
     return (
       <div>
         <table>
