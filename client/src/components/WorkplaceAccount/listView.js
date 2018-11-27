@@ -3,34 +3,48 @@ import React, { Component } from 'react';
 import WorkplaceAccountSummary from '../../components/WorkplaceAccount/summaryInfo';
 
 class WorkplaceAccountList extends Component {
-  render () {
-    return (
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              <th>Active</th><th>Day</th><th>Manager</th><th>Company Name</th><th>City</th>
-            </tr>
-            { this.props.workplaceAccounts.map(workplaceAccount => 
-              <WorkplaceAccountSummary 
-                key={(workplaceAccount.id ? workplaceAccount.id : "new_account")} 
-                workplaceAccount={workplaceAccount}
-                handleClick={this.props.handleClick}
-                // id={workplaceAccount.id}
-                // active={workplaceAccount.active}
-                // delivery_day={workplaceAccount.delivery_day}
-                // manager={workplaceAccount.manager["name"]}
-                // company_name={workplaceAccount.company_name} 
-                // company_city={workplaceAccount.company_city} 
-                toggleSwitch={this.props.toggleSwitch} />) }
-          </tbody>
-        </table>
-      </div>
+  constructor(props) {
+    super(props);
+    this.state = {
+      workplaceAccounts: props.workplaceAccounts
+    };
+  }
 
-    )
+  handleSort = (accountArray) => {
+    const sortedArray = [...accountArray];
+     sortedArray.sort(function(a, b){
+       return b.counter - a.counter;
+     })
+     this.setState({
+       ...this.state,
+       workplaceAccounts: sortedArray
+     })
+  }
+
+
+  render () {
+      return (
+        <div>
+          <button onClick={() => this.handleSort(this.state.workplaceAccounts)}>Sort by Likes</button>
+          <table>
+            <tbody>
+              <tr>
+                <th>Active</th><th>Day</th><th>Manager</th><th>Company Name</th><th>City</th>
+              </tr>
+              { this.state.workplaceAccounts.map(account => 
+                <WorkplaceAccountSummary 
+                  key={(account.id ? account.id : "new_account")} 
+                  workplaceAccount={account}
+                  handleClick={this.props.handleClick}
+                  toggleSwitch={this.props.toggleSwitch} />) }
+            </tbody>
+          </table>
+        </div>
+  
+      )
+
+    }
 
   }
 
-}
-
-export default WorkplaceAccountList;
+  export default WorkplaceAccountList;
