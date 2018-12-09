@@ -34,11 +34,11 @@ export const persistNewWorkplaceAccount = (accountInfo) => {
             body: JSON.stringify(accountInfo)
         }) //.then(res => handleErrors(res))
         .then(response => {
-            dispatch(addWorkplaceAccount(accountInfo)); //switch from accountInfo to response
-            //alert("Account successfully added");
-            //console.log(response);
+            dispatch(addWorkplaceAccount(accountInfo)); 
+            alert("Account successfully added");
+            console.log(response);
         })
-          .catch(error => console.log(error))
+        //   .catch(error => console.log(error))
            
     };
 
@@ -56,7 +56,6 @@ export const addWorkplaceAccount = (accountInfo) => {
 
 export const persistUpdatedWorkplaceAccount = (accountInfo, sendAlert=true) => {
     return dispatch => {
-        dispatch(updateWorkplaceAccount(accountInfo));
         fetch('/workplace_accounts/' + accountInfo.id, { 
             method: "PATCH",
             headers: {
@@ -64,6 +63,7 @@ export const persistUpdatedWorkplaceAccount = (accountInfo, sendAlert=true) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
+            dispatch(updateWorkplaceAccount(response));
             if (sendAlert === true) { alert("Account successfully updated"); }
             console.log(response);
         })

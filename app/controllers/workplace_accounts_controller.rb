@@ -19,6 +19,7 @@ class WorkplaceAccountsController < ApplicationController
     def update
         @workplace_account = WorkplaceAccount.find(params[:id])
         @workplace_account.update_attributes(account_params)
+        render json: @workplace_account
     end
 end
 

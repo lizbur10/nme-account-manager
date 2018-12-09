@@ -3,35 +3,41 @@ import React, { Component } from 'react';
 import WorkplaceAccountSummary from '../../components/WorkplaceAccount/summaryInfo';
 
 class WorkplaceAccountList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      workplaceAccounts: props.workplaceAccounts
-    };
-  }
+  state = {
+    workplaceAccounts: [],
+    sorted: false
+  };
 
-  handleSort = (accountArray) => {
-    const sortedArray = [...accountArray];
+  handleSort = () => {
+    const sortedArray = [...this.props.workplaceAccounts];
      sortedArray.sort(function(a, b){
        return b.counter - a.counter;
      })
      this.setState({
        ...this.state,
-       workplaceAccounts: sortedArray
+       workplaceAccounts: sortedArray,
+       sorted: true
      })
   }
 
 
   render () {
+    let arr = [];
+    if (this.state.sorted) {
+      arr = this.state.workplaceAccounts
+    } else {
+      arr = this.props.workplaceAccounts
+    }
       return (
         <div>
-          <button onClick={() => this.handleSort(this.state.workplaceAccounts)}>Sort by Likes</button>
+          <button onClick={() => this.handleSort()}>Sort by Likes</button>
           <table>
             <tbody>
               <tr>
                 <th>Active</th><th>Day</th><th>Manager</th><th>Company Name</th><th>City</th>
               </tr>
-              { this.state.workplaceAccounts.map(account => 
+              { 
+                arr.map(account => 
                 <WorkplaceAccountSummary 
                   key={(account.id ? account.id : "new_account")} 
                   workplaceAccount={account}
