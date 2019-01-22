@@ -33,9 +33,10 @@ export const persistNewWorkplaceAccount = (accountInfo) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
-            console.log(response);
-            dispatch(addWorkplaceAccount(accountInfo));
+            dispatch(addWorkplaceAccount(response));
+            // dispatch(addWorkplaceAccount(accountInfo));
             alert("Account successfully added");
+            console.log(response);
         })
 //          .catch(error => console.log(error))
            
@@ -58,8 +59,10 @@ export const persistUpdatedWorkplaceAccount = (accountInfo, sendAlert=true) => {
             },
             body: JSON.stringify(accountInfo)
         }).then(response => {
-            dispatch(updateWorkplaceAccount(accountInfo));
+            dispatch(updateWorkplaceAccount(response));
+            // dispatch(updateWorkplaceAccount(accountInfo));
             if (sendAlert === true) { alert("Account successfully updated"); }
+            console.log(accountInfo);
             console.log(response);
         })
 //          .catch(error => console.log(error))
